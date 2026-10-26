@@ -6,6 +6,7 @@
   - [0.1 Fourier Transform](#fourier-transform)
   - [0.2 $`\gamma`$ Matrices: Weyl Representation](#gamma-matrices)
   - [0.3 IO(1,3) Group](#classical-poincare)
+  - [0.4 Green's Functions](#greens-functions)
 - [1. Classical Field Theory](#qft-ch1)
   - [1.1 Lagrangian Formalism](#lagrangian-formalism)
     - [Lagrangian](#mechanics-lagrangian)
@@ -45,23 +46,25 @@
   - [2.4 Symmetry](#symmetry)
     - [Schrödinger Picture](#schrodinger-picture)
     - [Heisenberg Picture](#heisenberg-picture)
-- [3. Path Integrals](#qft-ch3)
-  - [3.1 Path Integrals in Quantum Mechanics](#path-integrals-in-quantum-mechanics)
-- [4. The Standard Model](#qft-ch4)
-  - [4.1 Yang–Mills Theory](#yang-mills)
-  - [4.2 Quantum Electrodynamics](#qed)
-  - [4.3 Quantum Chromodynamics](#qcd)
-  - [4.4 Spontaneous Symmetry Breaking and the Higgs Mechanism](#higgs-mechanism)
+- [3. The Standard Model](#qft-ch3)
+  - [3.1 Yang–Mills Theory](#yang-mills)
+  - [3.2 Quantum Electrodynamics](#qed)
+  - [3.3 Quantum Chromodynamics](#qcd)
+  - [3.4 Spontaneous Symmetry Breaking and the Higgs Mechanism](#higgs-mechanism)
     - [Higgs Lagrangian](#higgs-lagrangian)
     - [Spontaneous Symmetry Breaking](#spontaneous-symmetry-breaking)
     - [Higgs Mechanism](#higgs-mechanism-masses)
-  - [4.5 Electroweak Theory](#electroweak-theory)
+  - [3.5 Electroweak Theory](#electroweak-theory)
     - [Leptons in the Standard Model](#sm-leptons)
     - [Kinetic Terms](#electroweak-kinetic-terms)
     - [Yukawa Couplings and Charged-Lepton Masses](#charged-lepton-masses)
     - [Gauge-Boson Masses](#gauge-boson-masses)
     - [Quarks](#sm-quarks)
     - [Charged and Neutral Currents](#electroweak-currents)
+- [4. Path Integrals](#qft-ch4)
+  - [4.1 Path Integrals in Quantum Mechanics](#path-integrals-in-quantum-mechanics)
+  - [4.2 Path Integrals in Quantum Field Theory](#path-integrals-in-field-theory)
+  - [4.3 $`\phi^3`$ Theory](#phi-cubed-theory)
 - [5. New Physics Beyond the Standard Model](#qft-ch5)
   - [5.1 Seesaw Mechanism](#seesaw-mechanism)
     - [Type-I Seesaw](#type-i-seesaw)
@@ -79,6 +82,7 @@
 - [7. Renormalization](#qft-ch7)
   - [7.1 QED Renormalization](#qed-renormalization)
 - [8. Multi-Loop Renormalization](#qft-ch8)
+- [9. Cosmology](#qft-ch9)
 
 ---
 
@@ -533,6 +537,274 @@ J^{02}=\begin{pmatrix}0&0&i&0\\0&0&0&0\\i&0&0&0\\0&0&0&0\end{pmatrix},\quad
 J^{03}=\begin{pmatrix}0&0&0&i\\0&0&0&0\\0&0&0&0\\i&0&0&0\end{pmatrix}.
 \right.
 \tag{0.39}
+```
+
+
+<br><br>
+
+<a id="greens-functions"></a>
+### 0.4 Green's Functions
+
+**Definition and Integral Solution**
+
+In the general construction below, $`x,y`$ denote $`d`$ independent variables. Let $`\mathcal K_x`$ be a linear differential operator on $`\Omega\subseteq\mathbb R^d`$, and let $`\mathcal B`$ specify linear boundary or initial data:
+
+```math
+\left.
+\mathcal K_xu(x)=f(x),\qquad \mathcal Bu=b.
+\right.
+\tag{0.40}
+```
+
+Assume the data are sufficiently regular and the integrals below exist. Equations involving $`\delta`$ functions are understood in the sense of distributions.
+
+- **Green's function**: A kernel satisfying the differential equation and homogeneous boundary or initial conditions,
+
+```math
+\left.
+\boxed{\mathcal K_xG(x,y)=\delta^{(d)}(x-y),\qquad \mathcal B_xG(x,y)=0.}
+\right.
+\tag{0.41}
+```
+
+The subscript $`x`$ specifies the variable on which the operator acts. The choice of boundary or initial conditions is part of the definition of $`G`$.
+
+- **Integral solution**: If $`u_{\mathrm h}`$ solves the homogeneous equation with the prescribed data, then
+
+```math
+\left.
+\begin{aligned}
+\boxed{u(x)=u_{\mathrm h}(x)+\int_\Omega d^dy\,G(x,y)f(y),}\\
+\mathcal K_xu_{\mathrm h}(x)=0,\qquad \mathcal Bu_{\mathrm h}=b.
+\end{aligned}
+\right.
+\tag{0.42}
+```
+
+Indeed,
+
+```math
+\left.
+\begin{aligned}
+\mathcal K_xu(x)
+&=\int_\Omega d^dy\,[\mathcal K_xG(x,y)]f(y)
+=\int_\Omega d^dy\,\delta^{(d)}(x-y)f(y)=f(x),\\
+\mathcal Bu&=\mathcal Bu_{\mathrm h}
++\int_\Omega d^dy\,[\mathcal B_xG(x,y)]f(y)=b.
+\end{aligned}
+\right.
+\tag{0.43}
+```
+
+The solution is unique if $`\mathcal Ku=0`$, $`\mathcal Bu=0`$ has only the zero solution in the chosen function space. With nontrivial zero modes, uniqueness fails and solvability may impose compatibility conditions; an inverse on arbitrary sources cannot be assumed. Without boundary or initial conditions, two kernels satisfying the first equation in (0.41) can differ by a solution of the homogeneous equation in $`x`$.
+
+**Construction by Fourier Transform**
+
+For a constant-coefficient operator on Minkowski spacetime, return to $`x^\mu=(t,\mathbf x)`$ and the Fourier convention (0.1). If the chosen conditions are also translation invariant, $`G(x,y)=G(x-y)`$, and
+
+```math
+\left.
+\begin{aligned}
+\mathcal K(-ip)\widetilde G(p)&=1,\\
+G(x-y)&=\int\frac{d^4p}{(2\pi)^4}\,
+e^{-ip\cdot(x-y)}\widetilde G(p),\\
+\widetilde G(p)&=\left[\frac{1}{\mathcal K(-ip)}\right]_{\mathrm{prescription}}.
+\end{aligned}
+\right.
+\tag{0.44}
+```
+
+Here $`\mathcal K(-ip)`$ is obtained by replacing each $`\partial_\mu`$ with $`-ip_\mu`$. At zeros of $`\mathcal K(-ip)`$, the reciprocal requires a distributional prescription fixed by the chosen conditions; the algebraic equation alone does not select it.
+
+**Poisson Equation and Boundary Data**
+
+First consider a smooth source of compact support in $`\mathbb R^3`$:
+
+```math
+\left.
+-\nabla^2u(\mathbf x)=f(\mathbf x),\qquad
+u(\mathbf x)\to0\quad\text{as }|\mathbf x|\to\infty.
+\right.
+\tag{0.45}
+```
+
+For $`r:=|\mathbf x-\mathbf y|>0`$, a rotationally invariant kernel that vanishes at infinity obeys
+
+```math
+\left.
+\nabla^2G_0(r)=\frac{1}{r^2}\frac{d}{dr}\left(r^2\frac{dG_0}{dr}\right)=0
+\quad\Longrightarrow\quad G_0(r)=\frac{A}{r}.
+\right.
+\tag{0.46}
+```
+
+Integrating $`-\nabla^2G_0=\delta^{(3)}`$ over a ball $`B_\epsilon`$ centred at the source fixes $`A`$:
+
+```math
+\left.
+\begin{aligned}
+1&=-\int_{B_\epsilon}d^3x\,\nabla^2G_0
+=-4\pi\epsilon^2\left.\frac{dG_0}{dr}\right|_{r=\epsilon}
+=4\pi A,\\
+G_0(\mathbf x,\mathbf y)&=\frac{1}{4\pi|\mathbf x-\mathbf y|}.
+\end{aligned}
+\right.
+\tag{0.47}
+```
+
+Hence
+
+```math
+\left.
+\boxed{u(\mathbf x)=\int_{\mathbb R^3}d^3y\,
+\frac{f(\mathbf y)}{4\pi|\mathbf x-\mathbf y|}.}
+\right.
+\tag{0.48}
+```
+
+Now let $`\Omega\subset\mathbb R^3`$ be bounded with smooth boundary, and prescribe $`u=b`$ on $`\partial\Omega`$. The Dirichlet Green's function for $`-\nabla^2`$ is symmetric in its arguments and satisfies
+
+```math
+\left.
+\begin{aligned}
+-\nabla_{\mathbf y}^2G_D(\mathbf x,\mathbf y)
+&=\delta^{(3)}(\mathbf y-\mathbf x),\qquad \mathbf y\in\Omega,\\
+G_D(\mathbf x,\mathbf y)&=0,\qquad \mathbf y\in\partial\Omega.
+\end{aligned}
+\right.
+\tag{0.49}
+```
+
+Let $`\mathbf n_y`$ be the outward unit normal and $`\partial_{n_y}:=\mathbf n_y\cdot\nabla_{\mathbf y}`$. Green's second identity is
+
+```math
+\left.
+\int_\Omega d^3y\,(v\nabla^2w-w\nabla^2v)
+=\int_{\partial\Omega}dS_y\,(v\partial_{n_y}w-w\partial_{n_y}v).
+\right.
+\tag{0.50}
+```
+
+Apply (0.50) to $`v=u`$, $`w=G_D(\mathbf x,\cdot)`$ on $`\Omega\setminus B_\epsilon(\mathbf x)`$ and take $`\epsilon\to0^+`$. For $`\mathbf x\in\Omega`$,
+
+```math
+\left.
+\boxed{\begin{aligned}
+u(\mathbf x)&=\int_\Omega d^3y\,G_D(\mathbf x,\mathbf y)f(\mathbf y)\\
+&\quad-\int_{\partial\Omega}dS_y\,b(\mathbf y)\partial_{n_y}G_D(\mathbf x,\mathbf y).
+\end{aligned}}
+\right.
+\tag{0.51}
+```
+
+The second term supplies the nonzero boundary data. The free-space kernel $`G_0`$ in (0.47) generally does not satisfy the boundary condition in (0.49).
+
+**Klein–Gordon Equation and Initial Data**
+
+With $`m\geq0`$ and the mostly-minus metric, consider
+
+```math
+\left.
+(\Box+m^2)u(x)=f(x),\qquad
+\Box:=\partial_\mu\partial^\mu=\partial_t^2-\nabla^2.
+\right.
+\tag{0.52}
+```
+
+- **Retarded Green's function**: The translation-invariant kernel with support only at nonnegative time differences,
+
+```math
+\left.
+(\Box+m^2)G_{\mathrm{ret}}(t,\mathbf x)
+=\delta(t)\delta^{(3)}(\mathbf x),\qquad
+G_{\mathrm{ret}}(t,\mathbf x)=0\quad(t<0).
+\right.
+\tag{0.53}
+```
+
+Here the source point has been translated to the origin. Since $`\mathcal K(-ip)=m^2-p^2`$, the retarded prescription is
+
+```math
+\left.
+\widetilde G_{\mathrm{ret}}(p)
+=-\lim_{\epsilon\to0^+}\frac{1}{(p^0+i\epsilon)^2-E_{\mathbf p}^2},\qquad
+E_{\mathbf p}:=\sqrt{\mathbf p^2+m^2}.
+\right.
+\tag{0.54}
+```
+
+Both poles lie below the real $`p^0`$ axis. Closing the contour in the lower half-plane for $`t>0`$ and the upper half-plane for $`t<0`$ gives
+
+```math
+\left.
+\boxed{G_{\mathrm{ret}}(t,\mathbf x)
+=\theta(t)\int\frac{d^3p}{(2\pi)^3}\,
+e^{i\mathbf p\cdot\mathbf x}\frac{\sin(E_{\mathbf p}t)}{E_{\mathbf p}}.}
+\right.
+\tag{0.55}
+```
+
+Here $`\theta(t)`$ is the Heaviside function, and the value at $`E_{\mathbf p}=0`$ is understood by continuity. The equal-time limits are
+
+```math
+\left.
+G_{\mathrm{ret}}(0^+,\mathbf x)=0,\qquad
+\partial_tG_{\mathrm{ret}}(0^+,\mathbf x)=\delta^{(3)}(\mathbf x).
+\right.
+\tag{0.56}
+```
+
+For prescribed initial data $`u(t_0,\mathbf x)=u_0(\mathbf x)`$ and $`\partial_tu(t_0,\mathbf x)=u_1(\mathbf x)`$, (0.56) yields, for $`t>t_0`$,
+
+```math
+\left.
+\boxed{\begin{aligned}
+u(t,\mathbf x)
+&=\int d^3y\,\bigl[
+\partial_tG_{\mathrm{ret}}(t-t_0,\mathbf x-\mathbf y)u_0(\mathbf y)\\
+&\hspace{4.5em}+G_{\mathrm{ret}}(t-t_0,\mathbf x-\mathbf y)u_1(\mathbf y)\bigr]\\
+&\quad+\int_{t_0}^{t}dt'\int d^3y\,
+G_{\mathrm{ret}}(t-t',\mathbf x-\mathbf y)f(t',\mathbf y).
+\end{aligned}}
+\right.
+\tag{0.57}
+```
+
+For $`m=0`$, the spatial integral in (0.55) gives the wave-equation kernel. Writing $`r:=|\mathbf x|`$,
+
+```math
+\left.
+\begin{aligned}
+G_{\mathrm{ret}}(t,\mathbf x)\big|_{m=0}
+&=\frac{\theta(t)}{2\pi^2r}\int_0^\infty dp\,\sin(pr)\sin(pt)\\
+&=\boxed{\frac{\delta(t-r)}{4\pi r}}.
+\end{aligned}
+\right.
+\tag{0.58}
+```
+
+With zero initial data, extend $`f(t',\mathbf y)`$ by zero for $`t'<t_0`$. Then (0.57) reduces to
+
+```math
+\left.
+\boxed{u(t,\mathbf x)=\int d^3y\,
+\frac{f(t-|\mathbf x-\mathbf y|,\mathbf y)}{4\pi|\mathbf x-\mathbf y|}.}
+\right.
+\tag{0.59}
+```
+
+For comparison with the scalar Feynman propagator defined in (6.12), the Feynman prescription for the same normalization $`\mathcal KG_F=\delta^{(4)}`$ gives
+
+```math
+\left.
+\begin{aligned}
+G_F(x-y)&=-\lim_{\varepsilon\to0^+}\int\frac{d^4p}{(2\pi)^4}\,
+\frac{e^{-ip\cdot(x-y)}}{p^2-m^2+i\varepsilon}
+=i\Delta_F(x-y),\\
+(\Box_x+m^2)\Delta_F(x-y)&=-i\delta^{(4)}(x-y).
+\end{aligned}
+\right.
+\tag{0.60}
 ```
 
 
@@ -3408,135 +3680,10 @@ where $`\hat H_H(t):=\hat U^\dagger\hat H(t)\,\hat U`$ and $`(\partial\hat O_S/\
 <br><br>
 
 <a id="qft-ch3"></a>
-## 3. Path Integrals
-
-**Transition Amplitude and Vacuum Functional**
-
-For a scalar field with a canonical quadratic kinetic term, the transition kernel between fixed boundary configurations is formally
-
-```math
-\left.
-\langle\phi_f,t_f|\phi_i,t_i\rangle
-=\int_{\phi(t_i)=\phi_i}^{\phi(t_f)=\phi_f}\mathcal D\phi\,e^{iS[\phi]},
-\qquad S[\phi]:=\int d^4x\,\mathcal L.
-\right.
-\tag{3.1}
-```
-
-The normalized vacuum functional uses vacuum boundary conditions selected by the Feynman prescription:
-
-```math
-\left.
-\begin{aligned}
-Z[J]&:=\frac{\int\mathcal D\phi\,\exp\!\left(iS[\phi]+i\int d^4x\,J\phi\right)}
-{\int\mathcal D\phi\,e^{iS[\phi]}},\qquad Z[0]=1,\\
-G_n(x_1,\ldots,x_n)&:=\langle\Omega|\mathcal T[\hat\phi_H(x_1)\cdots\hat\phi_H(x_n)]|\Omega\rangle
-=\left.\frac{1}{i^n}\frac{\delta^n Z[J]}{\delta J(x_1)\cdots\delta J(x_n)}\right|_{J=0}.
-\end{aligned}
-\right.
-\tag{3.2}
-```
-
-Here $`|\Omega\rangle`$ is the normalized interacting vacuum and $`J(x)`$ is a commuting external source. Functional integrals require a regulator; the expressions below define their perturbative use.
-
-**Free Field and Connected Functions**
-
-For a free real scalar field,
-
-```math
-\left.
-\begin{aligned}
-\Delta_F(x-y)&:=\int\frac{d^4p}{(2\pi)^4}\,
-\frac{i\,e^{-ip\cdot(x-y)}}{p^2-m^2+i\varepsilon},\qquad\varepsilon\to0^+,\\
-Z_0[J]&=\exp\!\left[-\frac12\int d^4x\,d^4y\,J(x)\Delta_F(x-y)J(y)\right],\\
-W[J]&:=-i\ln Z[J],\qquad
-G_{n,\mathrm c}=\left.\frac{1}{i^{n-1}}\frac{\delta^nW}{\delta J(x_1)\cdots\delta J(x_n)}\right|_{J=0}.
-\end{aligned}
-\right.
-\tag{3.3}
-```
-
-**Effective Action and Schwinger--Dyson Equation**
-
-The Legendre transform generates one-particle-irreducible (1PI) vertices, where a 1PI graph stays connected after cutting any single internal line:
-
-```math
-\left.
-\phi_c(x):=\frac{\delta W}{\delta J(x)},\qquad
-\Gamma[\phi_c]:=W[J]-\int d^4x\,J\phi_c,\qquad
-\boxed{\frac{\delta\Gamma}{\delta\phi_c(x)}=-J(x).}
-\right.
-\tag{3.4}
-```
-
-For a translation-invariant scalar functional measure, with functional boundary terms absent,
-
-```math
-\left.
-\left[
-\left.\frac{\delta S}{\delta\phi(x)}\right|_{\phi\,\to\,(1/i)\delta/\delta J}
-+J(x)\right]Z[J]=0.
-\right.
-\tag{3.5}
-```
-
-**Euclidean Continuation and Fermions**
-
-When the time contour can be rotated without crossing singularities, $`t=-i\tau`$ gives, for $`\mathcal L=\tfrac12\partial_\mu\phi\partial^\mu\phi-V(\phi)`$,
-
-```math
-\left.
-e^{iS}\longrightarrow e^{-S_E},\qquad
-S_E=\int d\tau\,d^3x\left[\frac12(\partial_\tau\phi)^2
-+\frac12(\boldsymbol\nabla\phi)^2+V(\phi)\right].
-\right.
-\tag{3.6}
-```
-
-Fermionic fields in the functional integral are independent Grassmann variables. With a fixed measure ordering, a quadratic Dirac action gives
-
-```math
-\left.
-\int\mathcal D\bar\psi\,\mathcal D\psi\,
-e^{i\int d^4x\,\bar\psi K\psi}\ \propto\ \det K,
-\qquad K=i\gamma^\mu\partial_\mu-m,
-\right.
-\tag{3.7}
-```
-
-where the field-independent normalization is absorbed into $`Z[0]`$ and the inverse of $`K`$ uses the Feynman prescription.
-
-**Gauge Fixing and Faddeev--Popov Ghosts**
-
-For perturbative $`SU(3)`$ theory near the trivial gauge configuration, Lorenz gauge introduces the gauge parameter $`\xi`$ and anticommuting scalar ghost fields $`c^a,\bar c^a`$:
-
-```math
-\left.
-\begin{aligned}
-\mathcal L_{\mathrm{gf}}&=-\frac{1}{2\xi}(\partial^\mu A^a_\mu)^2,\\
-\mathcal L_{\mathrm{gh}}&=-\bar c^a\partial^\mu(D_\mu^{ab}c^b),\qquad
-D_\mu^{ab}:=\delta^{ab}\partial_\mu+g_s f^{acb}A^c_\mu,\\
-\Delta_{\mathrm{FP}}[A]&=\det[-\partial^\mu D_\mu^{ab}].
-\end{aligned}
-\right.
-\tag{3.8}
-```
-
-For an Abelian gauge field in this linear gauge, the determinant is field independent and the ghosts decouple. This local perturbative construction does not resolve global gauge-copy ambiguities.
-
-
-<br><br>
-
-<a id="path-integrals-in-quantum-mechanics"></a>
-### 3.1 Path Integrals in Quantum Mechanics
-
-<br><br>
-
-<a id="qft-ch4"></a>
-## 4. The Standard Model
+## 3. The Standard Model
 
 <a id="yang-mills"></a>
-### 4.1 Yang–Mills Theory
+### 3.1 Yang–Mills Theory
 
 **Lie Group**
 
@@ -3547,7 +3694,7 @@ U(n)&=\{A\in M_n(\mathbb C)\mid A^\dagger A=I\},\\[6pt]
 SU(n)&=\{A\in M_n(\mathbb C)\mid \det A=1,\ A^\dagger A=I\}.
 \end{aligned}
 \right.
-\tag{4.1}
+\tag{3.1}
 ```
 
 
@@ -3565,7 +3712,7 @@ g^\dagger(\theta)g(\theta)=I\quad\text{for all }\theta\in\mathbb R
 \Longrightarrow T^\dagger=T.
 \end{aligned}
 \right.
-\tag{4.2}
+\tag{3.2}
 ```
 
  The Lie algebra is
@@ -3574,7 +3721,7 @@ g^\dagger(\theta)g(\theta)=I\quad\text{for all }\theta\in\mathbb R
 \left.
 \mathfrak{u}(n)=\{iT\in M_n(\mathbb C)\mid T^\dagger=T\}.
 \right.
-\tag{4.3}
+\tag{3.3}
 ```
 
 
@@ -3589,7 +3736,7 @@ g(\theta)&=e^{i\theta T},\qquad \theta\in\mathbb R,\quad T\in M_n(\mathbb C),\\[
 \left.\frac{d}{d\theta}g(\theta)\right|_{\theta=0}&=iT.
 \end{aligned}
 \right.
-\tag{4.4}
+\tag{3.4}
 ```
 
 
@@ -3599,7 +3746,7 @@ g(\theta)&=e^{i\theta T},\qquad \theta\in\mathbb R,\quad T\in M_n(\mathbb C),\\[
 =i(T-T^\dagger)
 \quad\Longrightarrow\quad T^\dagger=T.
 \right.
-\tag{4.5}
+\tag{3.5}
 ```
 
 We use the theorem $`\det(e^{i\theta T})=e^{i\theta\,\mathop{\rm tr}\nolimits\,T}`$, valid for any $`T\in M_n(\mathbb C)`$ and $`\theta\in\mathbb C`$.
@@ -3611,7 +3758,7 @@ We use the theorem $`\det(e^{i\theta T})=e^{i\theta\,\mathop{\rm tr}\nolimits\,T
 =i\,\mathop{\rm tr}\nolimits\,T
 \quad\Longrightarrow\quad \mathop{\rm tr}\nolimits\,T=0.
 \right.
-\tag{4.6}
+\tag{3.6}
 ```
 
 Thus $`T`$ is traceless and Hermitian, and the Lie algebra is
@@ -3621,7 +3768,7 @@ Thus $`T`$ is traceless and Hermitian, and the Lie algebra is
 \mathfrak{su}(n)=\{iT\in M_n(\mathbb C)\mid
 \mathop{\rm tr}\nolimits\,T=0,\ T^\dagger=T\}.
 \right.
-\tag{4.7}
+\tag{3.7}
 ```
 
 Scalar multiplication is taken over $`\mathbb R`$ to preserve anti-Hermiticity; hence $`\mathfrak{su}(n)`$ and  $`\mathfrak{u}(n)`$ are both real Lie algebras.
@@ -3645,7 +3792,7 @@ Since the matrices $`T^a`$ are Hermitian,
 [T^a,T^b]&=f^{abc}(iT^c),\qquad f^{abc}\in\mathbb R.
 \end{aligned}
 \right.
-\tag{4.8}
+\tag{3.8}
 ```
 
 The expansion coefficients are real because $`\{iT^c\}`$ is a basis over $`\mathbb R`$.
@@ -3663,10 +3810,10 @@ For $`iT_1,iT_2\in\mathfrak{su}(n)`$, define
 &=2\,\mathop{\rm tr}\nolimits (T_1T_2).
 \end{aligned}
 \right.
-\tag{4.9}
+\tag{3.9}
 ```
 
-**Proof** that (4.9) satisfies the axioms of an inner product
+**Proof** that (3.9) satisfies the axioms of an inner product
 
 
 
@@ -3684,7 +3831,7 @@ Using $`T_1^\dagger=T_1`$, $`T_2^\dagger=T_2`$ and cyclicity of the trace,
 =\mathop{\rm tr}\nolimits (T_1T_2),
 \end{aligned}
 \right.
-\tag{4.10}
+\tag{3.10}
 ```
 
 so $`(iT_1,iT_2)=2\,\mathop{\rm tr}\nolimits (T_1T_2)\in\mathbb R`$.
@@ -3700,7 +3847,7 @@ By cyclicity of the trace,
 &=2\,\mathop{\rm tr}\nolimits (T_2T_1)=(iT_2,iT_1).
 \end{aligned}
 \right.
-\tag{4.11}
+\tag{3.11}
 ```
 
 *(iii) Bilinearity.* 
@@ -3717,7 +3864,7 @@ and linearity of the trace gives $`(a\,iT_1+b\,iT_2,\,iT_3)=2\,\mathop{\rm tr}\n
 &=2\sum_{j,k}|T_{jk}|^2\ge0.
 \end{aligned}
 \right.
-\tag{4.12}
+\tag{3.12}
 ```
 
 Equality holds if and only if $`T_{jk}=0`$ for all $`j,k`$, i.e. $`iT=0`$. $`\square`$
@@ -3728,7 +3875,7 @@ Having established that this form defines an inner product on $`\mathfrak{su}(n)
 \left.
 \boxed{\mathop{\rm tr}\nolimits (T^aT^b)=\frac12\delta^{ab}.}
 \right.
-\tag{4.13}
+\tag{3.13}
 ```
 
 **Total antisymmetry.** With this normalization and cyclicity of the trace, we obtain
@@ -3745,7 +3892,7 @@ f^{acb}
 =-f^{abc}.
 \end{aligned}
 \right.
-\tag{4.14}
+\tag{3.14}
 ```
 
 ```math
@@ -3754,7 +3901,7 @@ f^{acb}
 f^{abc}=f^{[abc]}\in\mathbb R
 }
 \right.
-\tag{4.15}
+\tag{3.15}
 ```
 
 <a id="ym-5"></a>
@@ -3778,7 +3925,7 @@ The field operator is defined as
 \psi_n(x)
 \end{pmatrix}.
 \right.
-\tag{4.16}
+\tag{3.16}
 ```
 
 Define the Dirac adjoint by
@@ -3790,7 +3937,7 @@ Define the Dirac adjoint by
 \bar\psi_a(x)&:=\psi_a^\dagger(x)\gamma^0.
 \end{aligned}
 \right.
-\tag{4.17}
+\tag{3.17}
 ```
 
 The kinetic term of the Lagrangian density is
@@ -3803,7 +3950,7 @@ The kinetic term of the Lagrangian density is
 &=\sum_{a=1}^{n}\bar\psi_a\,i\gamma^\mu\partial_\mu\psi_a.
 \end{aligned}
 \right.
-\tag{4.18}
+\tag{3.18}
 ```
 
 
@@ -3820,7 +3967,7 @@ A_\mu'&=U(\theta)A_\mu U(\theta)^\dagger-\frac{i}{g_{\mathrm{YM}}}\bigl(\partial
 D_\mu'&=U(\theta)D_\mu U(\theta)^\dagger .
 \end{aligned}
 \right.
-\tag{4.19}
+\tag{3.19}
 ```
 
 The field strength is
@@ -3835,10 +3982,10 @@ F_{\mu\nu}^a&=\partial_\mu A_\nu^a-\partial_\nu A_\mu^a
 F_{\mu\nu}'&=U(\theta)F_{\mu\nu}U(\theta)^\dagger .
 \end{aligned}
 \right.
-\tag{4.20}
+\tag{3.20}
 ```
 
-Including the gauge field, the kinetic term (4.18) becomes
+Including the gauge field, the kinetic term (3.18) becomes
 
 ```math
 \left.
@@ -3851,7 +3998,7 @@ Including the gauge field, the kinetic term (4.18) becomes
 \end{aligned}
 }
 \right.
-\tag{4.21}
+\tag{3.21}
 ```
 
 On a matrix-valued adjoint field $`X`$, define $`D_\mu X:=\partial_\mu X-ig_{\mathrm{YM}}[A_\mu,X]`$.
@@ -3867,18 +4014,18 @@ j^\nu:=(\bar\Psi\gamma^\nu T^a\Psi)T^a,\\
 D_\mu F_{\nu\rho}+D_\nu F_{\rho\mu}+D_\rho F_{\mu\nu}&=0 .
 \end{aligned}
 \right.
-\tag{4.22}
+\tag{3.22}
 ```
 
 <br><br>
 
 <a id="qed"></a>
-### 4.2 Quantum Electrodynamics
+### 3.2 Quantum Electrodynamics
 
 
 **Gauge Group $`U(1)`$**
 
-The gauge group of QED is $`U(1)`$, i.e. (4.1) with $`n=1`$; its Lie algebra $`\mathfrak u(1)=i\mathbb R`$ is Abelian. 
+The gauge group of QED is $`U(1)`$, i.e. (3.1) with $`n=1`$; its Lie algebra $`\mathfrak u(1)=i\mathbb R`$ is Abelian. 
 
 Let $`e>0`$ be the elementary charge and $`\theta:\mathbb R^4\to\mathbb R`$. The transformation is a flavor singlet: it acts identically on the three generations. It differs between representations of $`U(1)`$, which are labeled by the charge: a Dirac field $`\psi_f`$ as in (1.94) with charge $`Q_fe`$ transforms, with the same $`\theta`$ for every $`f`$, as
 
@@ -3895,12 +4042,12 @@ Q_f&=\begin{cases}
 \end{cases}
 \end{aligned}
 \right.
-\tag{4.23}
+\tag{3.23}
 ```
 
 **Covariant Derivative and Field Strength**
 
-The photon field $`A_\mu`$ is real. Taking $`U(\theta)=e^{iQ\theta}`$ and replacing $`g_{\mathrm{YM}}A_\mu`$ by $`eQA_\mu`$ in (4.19)–(4.20) gives
+The photon field $`A_\mu`$ is real. Taking $`U(\theta)=e^{iQ\theta}`$ and replacing $`g_{\mathrm{YM}}A_\mu`$ by $`eQA_\mu`$ in (3.19)–(3.20) gives
 
 ```math
 \left.
@@ -3912,7 +4059,7 @@ A_\mu'&=A_\mu+\frac1e\,\partial_\mu\theta,\\
 F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu=F_{\mu\nu}'.
 \end{aligned}
 \right.
-\tag{4.24}
+\tag{3.24}
 ```
 
 
@@ -3927,10 +4074,10 @@ F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu=F_{\mu\nu}'.
 -\frac14F_{\mu\nu}F^{\mu\nu},
 }
 \right.
-\tag{4.25}
+\tag{3.25}
 ```
 
-where $`m`$ is the mass of $`\psi`$ and $`D_\mu`$ acts on the $`\psi`$ to its right. By (4.23)–(4.24), $`\mathcal L_{\mathrm{QED}}`$ is gauge invariant. Substituting $`D_\mu`$,
+where $`m`$ is the mass of $`\psi`$ and $`D_\mu`$ acts on the $`\psi`$ to its right. By (3.23)–(3.24), $`\mathcal L_{\mathrm{QED}}`$ is gauge invariant. Substituting $`D_\mu`$,
 
 ```math
 \left.
@@ -3939,7 +4086,7 @@ where $`m`$ is the mass of $`\psi`$ and $`D_\mu`$ acts on the $`\psi`$ to its ri
 -\frac14F_{\mu\nu}F^{\mu\nu}
 +eQA_\mu\bar\psi\gamma^\mu\psi,
 \right.
-\tag{4.26}
+\tag{3.26}
 ```
 
 i.e. the Dirac Lagrangian (1.94), the Maxwell Lagrangian (1.147) and the interaction term.
@@ -3959,17 +4106,17 @@ With $`j^\nu=\bar\psi\gamma^\nu\psi`$ as in (1.132), $`\partial\mathcal L_{\math
 \partial_\mu F_{\nu\rho}+\partial_\nu F_{\rho\mu}+\partial_\rho F_{\mu\nu}&=0 .
 \end{aligned}
 \right.
-\tag{4.27}
+\tag{3.27}
 ```
 
 <br><br>
 
 <a id="qcd"></a>
-### 4.3 Quantum Chromodynamics
+### 3.3 Quantum Chromodynamics
 
 **Color Group $`SU(3)`$**
 
-The gauge group of QCD is $`SU(3)`$. By (4.7) with $`n=3`$, $`\mathfrak{su}(3)`$ has a basis $`\{iT^a\}`$, $`a=1,\ldots,8`$, which we take orthonormal in the sense of (4.13). The standard choice is $`T^a:=\tfrac12\lambda^a`$, where the Gell-Mann matrices are
+The gauge group of QCD is $`SU(3)`$. By (3.7) with $`n=3`$, $`\mathfrak{su}(3)`$ has a basis $`\{iT^a\}`$, $`a=1,\ldots,8`$, which we take orthonormal in the sense of (3.13). The standard choice is $`T^a:=\tfrac12\lambda^a`$, where the Gell-Mann matrices are
 
 ```math
 \left.
@@ -3984,10 +4131,10 @@ The gauge group of QCD is $`SU(3)`$. By (4.7) with $`n=3`$, $`\mathfrak{su}(3)`$
 \lambda^8&=\frac1{\sqrt3}\begin{pmatrix}1&0&0\\0&1&0\\0&0&-2\end{pmatrix}.
 \end{aligned}
 \right.
-\tag{4.28}
+\tag{3.28}
 ```
 
-Each $`\lambda^a`$ is Hermitian and traceless, and $`\mathop{\rm tr}\nolimits (\lambda^a\lambda^b)=2\delta^{ab}`$, so $`\mathop{\rm tr}\nolimits (T^aT^b)=\tfrac12\delta^{ab}`$ as in (4.13). By (4.14), $`f^{abc}=-2i\,\mathop{\rm tr}\nolimits ([T^a,T^b]T^c)`$; up to the antisymmetry (4.15), the nonzero structure constants are
+Each $`\lambda^a`$ is Hermitian and traceless, and $`\mathop{\rm tr}\nolimits (\lambda^a\lambda^b)=2\delta^{ab}`$, so $`\mathop{\rm tr}\nolimits (T^aT^b)=\tfrac12\delta^{ab}`$ as in (3.13). By (3.14), $`f^{abc}=-2i\,\mathop{\rm tr}\nolimits ([T^a,T^b]T^c)`$; up to the antisymmetry (3.15), the nonzero structure constants are
 
 ```math
 \left.
@@ -3998,7 +4145,7 @@ f^{156}=f^{367}=-\tfrac12,\\[4pt]
 f^{458}=f^{678}&=\tfrac{\sqrt3}{2}.
 \end{aligned}
 \right.
-\tag{4.29}
+\tag{3.29}
 ```
 
 The quadratic Casimir $`T^aT^a`$ commutes with every $`T^b`$, since $`f^{bac}`$ is antisymmetric in $`a,c`$:
@@ -4007,10 +4154,10 @@ The quadratic Casimir $`T^aT^a`$ commutes with every $`T^b`$, since $`f^{bac}`$ 
 \left.
 [T^b,T^aT^a]=[T^b,T^a]T^a+T^a[T^b,T^a]=if^{bac}\bigl(T^cT^a+T^aT^c\bigr)=0.
 \right.
-\tag{4.30}
+\tag{3.30}
 ```
 
-The defining representation of $`SU(3)`$ is irreducible, so by Schur's lemma $`T^aT^a=C_FI_3`$. Taking the trace with (4.13),
+The defining representation of $`SU(3)`$ is irreducible, so by Schur's lemma $`T^aT^a=C_FI_3`$. Taking the trace with (3.13),
 
 ```math
 \left.
@@ -4018,12 +4165,12 @@ The defining representation of $`SU(3)`$ is irreducible, so by Schur's lemma $`T
 \quad\Longrightarrow\quad
 \boxed{T^aT^a=C_FI_3,\qquad C_F=\tfrac43.}
 \right.
-\tag{4.31}
+\tag{3.31}
 ```
 
 **Quark Fields**
 
-For each flavor $`f\in\{u,d,s,c,b,t\}`$ the quark field is a color triplet, i.e. the multiplet (4.16) with $`n=3`$, with Dirac adjoint as in (4.17):
+For each flavor $`f\in\{u,d,s,c,b,t\}`$ the quark field is a color triplet, i.e. the multiplet (3.16) with $`n=3`$, with Dirac adjoint as in (3.17):
 
 ```math
 \left.
@@ -4031,7 +4178,7 @@ q_f(x):=\begin{pmatrix}\psi_{f,1}(x)\\\psi_{f,2}(x)\\\psi_{f,3}(x)\end{pmatrix},
 \qquad
 \bar q_f(x):=\bigl(\bar\psi_{f,1}(x),\bar\psi_{f,2}(x),\bar\psi_{f,3}(x)\bigr).
 \right.
-\tag{4.32}
+\tag{3.32}
 ```
 
 Throughout this section $`\gamma^\mu`$ acts on the spinor index of each $`\psi_{f,a}`$ and the $`3\times3`$ matrices $`T^a`$ act on the color index, so $`\gamma^\mu`$ commutes with every matrix built from the $`T^a`$.
@@ -4044,7 +4191,7 @@ Let $`\theta^a:\mathbb R^4\to\mathbb R`$, $`a=1,\ldots,8`$, and set
 \left.
 g(x):=e^{i\theta^a(x)T^a}\in SU(3).
 \right.
-\tag{4.33}
+\tag{3.33}
 ```
 
 This is the internal transformation (1.66) with $`g`$ now depending on $`x`$. The quark fields transform as
@@ -4054,10 +4201,10 @@ This is the internal transformation (1.66) with $`g`$ now depending on $`x`$. Th
 q_f'(x)=g(x)\,q_f(x),\qquad
 \bar q_f'(x)=\bar q_f(x)\,g^\dagger(x).
 \right.
-\tag{4.34}
+\tag{3.34}
 ```
 
-Since $`\partial_\mu(gq_f)=g\,\partial_\mu q_f+(\partial_\mu g)\,q_f`$, the derivative term of (4.18) is not invariant under (4.34):
+Since $`\partial_\mu(gq_f)=g\,\partial_\mu q_f+(\partial_\mu g)\,q_f`$, the derivative term of (3.18) is not invariant under (3.34):
 
 ```math
 \left.
@@ -4065,7 +4212,7 @@ Since $`\partial_\mu(gq_f)=g\,\partial_\mu q_f+(\partial_\mu g)\,q_f`$, the deri
 =\bar q_f\,i\gamma^\mu\partial_\mu q_f
 +\bar q_f\,i\gamma^\mu g^\dagger(\partial_\mu g)\,q_f.
 \right.
-\tag{4.35}
+\tag{3.35}
 ```
 
 **Covariant Derivative and Gluon Fields**
@@ -4077,7 +4224,7 @@ Introduce eight real vector fields $`A^a_\mu`$, the gluon fields, and define
 A_\mu:=A^a_\mu T^a,\qquad
 D_\mu:=\partial_\mu-ig_sA_\mu,
 \right.
-\tag{4.36}
+\tag{3.36}
 ```
 
 where $`g_s\in\mathbb R`$ is the strong coupling constant and $`D_\mu`$ acts on color triplets. Let $`A_\mu'`$ denote the transformed gluon field and $`D_\mu':=\partial_\mu-ig_sA_\mu'`$. We require $`D_\mu'q_f'=g\,D_\mu q_f`$:
@@ -4089,7 +4236,7 @@ D_\mu'(gq_f)&=g\,\partial_\mu q_f+(\partial_\mu g)\,q_f-ig_sA_\mu'\,g\,q_f,\\[6p
 g\,D_\mu q_f&=g\,\partial_\mu q_f-ig_s\,gA_\mu\,q_f.
 \end{aligned}
 \right.
-\tag{4.37}
+\tag{3.37}
 ```
 
 Equating the two for all $`q_f`$ gives $`A_\mu'g=gA_\mu-\frac{i}{g_s}\partial_\mu g`$, i.e.
@@ -4101,7 +4248,7 @@ A_\mu'=gA_\mu g^\dagger-\frac{i}{g_s}(\partial_\mu g)\,g^\dagger
 =gA_\mu g^\dagger+\frac{i}{g_s}\,g\,\partial_\mu g^\dagger.
 }
 \right.
-\tag{4.38}
+\tag{3.38}
 ```
 
 Differentiating $`gg^\dagger=I_3`$ gives $`\bigl((\partial_\mu g)g^\dagger\bigr)^\dagger=-(\partial_\mu g)g^\dagger`$, and Jacobi's formula $`\partial_\mu\det g=\det g\,\mathop{\rm tr}\nolimits (g^\dagger\partial_\mu g)`$ with $`\det g=1`$ gives $`\mathop{\rm tr}\nolimits \bigl((\partial_\mu g)g^\dagger\bigr)=0`$. Hence $`A_\mu'`$ is again Hermitian and traceless, $`A_\mu'=A_\mu'^aT^a`$ with real $`A_\mu'^a`$.
@@ -4112,10 +4259,10 @@ Since $`D_\mu'(gq_f)=g\,D_\mu q_f`$ holds for all $`q_f`$, as operators on color
 \left.
 D_\mu'=g\,D_\mu\,g^\dagger.
 \right.
-\tag{4.39}
+\tag{3.39}
 ```
 
-For infinitesimal $`\theta^a`$, $`g=I_3+i\theta^aT^a+O(\theta^2)`$ and (4.38) gives
+For infinitesimal $`\theta^a`$, $`g=I_3+i\theta^aT^a+O(\theta^2)`$ and (3.38) gives
 
 ```math
 \left.
@@ -4126,7 +4273,7 @@ A_\mu'&=A_\mu+i\theta^b[T^b,A_\mu]+\frac1{g_s}(\partial_\mu\theta^a)T^a+O(\theta
 &=\frac1{g_s}\partial_\mu\theta^a+f^{abc}A^b_\mu\theta^c+O(\theta^2).
 \end{aligned}
 \right.
-\tag{4.40}
+\tag{3.40}
 ```
 
 **Field Strength**
@@ -4142,7 +4289,7 @@ Define $`F_{\mu\nu}`$ by $`[D_\mu,D_\nu]=:-ig_sF_{\mu\nu}`$. Since $`[\partial_\
 F_{\mu\nu}&=\partial_\mu A_\nu-\partial_\nu A_\mu-ig_s[A_\mu,A_\nu].
 \end{aligned}
 \right.
-\tag{4.41}
+\tag{3.41}
 ```
 
 Expanding in the basis, $`F_{\mu\nu}=F^a_{\mu\nu}T^a`$ with
@@ -4153,10 +4300,10 @@ Expanding in the basis, $`F_{\mu\nu}=F^a_{\mu\nu}T^a`$ with
 F^a_{\mu\nu}=\partial_\mu A^a_\nu-\partial_\nu A^a_\mu+g_sf^{abc}A^b_\mu A^c_\nu.
 }
 \right.
-\tag{4.42}
+\tag{3.42}
 ```
 
-By (4.39), $`[D_\mu',D_\nu']=g[D_\mu,D_\nu]g^\dagger`$, so
+By (3.39), $`[D_\mu',D_\nu']=g[D_\mu,D_\nu]g^\dagger`$, so
 
 ```math
 \left.
@@ -4164,10 +4311,10 @@ F_{\mu\nu}'=gF_{\mu\nu}g^\dagger,
 \qquad
 \delta F^a_{\mu\nu}=f^{abc}F^b_{\mu\nu}\theta^c+O(\theta^2).
 \right.
-\tag{4.43}
+\tag{3.43}
 ```
 
-By cyclicity of the trace and (4.13),
+By cyclicity of the trace and (3.13),
 
 ```math
 \left.
@@ -4175,7 +4322,7 @@ By cyclicity of the trace and (4.13),
 =\mathop{\rm tr}\nolimits \bigl(F_{\mu\nu}F^{\mu\nu}\bigr)
 =\tfrac12F^a_{\mu\nu}F^{a\mu\nu}.
 \right.
-\tag{4.44}
+\tag{3.44}
 ```
 
 **The QCD Lagrangian**
@@ -4190,10 +4337,10 @@ By cyclicity of the trace and (4.13),
 -\frac14F^a_{\mu\nu}F^{a\mu\nu},
 }
 \right.
-\tag{4.45}
+\tag{3.45}
 ```
 
-where the sum runs over the six flavors in (4.32), $`m_f`$ is the mass of flavor $`f`$, and $`D_\mu`$ acts on the $`q_f`$ to its right. Under (4.34) and (4.38), $`D_\mu'q_f'=g\,D_\mu q_f`$ by construction, so
+where the sum runs over the six flavors in (3.32), $`m_f`$ is the mass of flavor $`f`$, and $`D_\mu`$ acts on the $`q_f`$ to its right. Under (3.34) and (3.38), $`D_\mu'q_f'=g\,D_\mu q_f`$ by construction, so
 
 ```math
 \left.
@@ -4201,12 +4348,12 @@ where the sum runs over the six flavors in (4.32), $`m_f`$ is the mass of flavor
 =\bar q_f\,g^\dagger\bigl(i\gamma^\mu g\,D_\mu-m_f\,g\bigr)q_f
 =\bar q_f\bigl(i\gamma^\mu D_\mu-m_f\bigr)q_f.
 \right.
-\tag{4.46}
+\tag{3.46}
 ```
 
-Together with (4.44), $`\mathcal L_{\mathrm{QCD}}`$ is invariant under the local transformations (4.34), (4.38).
+Together with (3.44), $`\mathcal L_{\mathrm{QCD}}`$ is invariant under the local transformations (3.34), (3.38).
 
-Substituting (4.36) and (4.42) into (4.45) separates the free and interaction terms:
+Substituting (3.36) and (3.42) into (3.45) separates the free and interaction terms:
 
 ```math
 \left.
@@ -4219,7 +4366,7 @@ Substituting (4.36) and (4.42) into (4.45) separates the free and interaction te
 -\frac{g_s^2}{4}f^{abc}f^{ade}A^b_\mu A^c_\nu A^{d\mu}A^{e\nu}.
 \end{aligned}
 \right.
-\tag{4.47}
+\tag{3.47}
 ```
 
 **Equations of Motion**
@@ -4230,10 +4377,10 @@ Treating $`q_f`$, $`\bar q_f`$ and $`A^a_\mu`$ as independent, the Euler–Lagra
 \left.
 \bigl(i\gamma^\mu D_\mu-m_f\bigr)q_f=0.
 \right.
-\tag{4.48}
+\tag{3.48}
 ```
 
-For $`A^a_\nu`$, define the color current $`j^{a\nu}:=\sum_f\bar q_f\gamma^\nu T^aq_f`$. From (4.45) with (4.42) and (4.47),
+For $`A^a_\nu`$, define the color current $`j^{a\nu}:=\sum_f\bar q_f\gamma^\nu T^aq_f`$. From (3.45) with (3.42) and (3.47),
 
 ```math
 \left.
@@ -4247,7 +4394,7 @@ For $`A^a_\nu`$, define the color current $`j^{a\nu}:=\sum_f\bar q_f\gamma^\nu T
 &=g_sj^{a\nu}+g_sf^{abc}A^b_\mu F^{c\mu\nu}.
 \end{aligned}
 \right.
-\tag{4.49}
+\tag{3.49}
 ```
 
 The Euler–Lagrange equation $`\partial_\mu\bigl(\partial\mathcal L_{\mathrm{QCD}}/\partial(\partial_\mu A^a_\nu)\bigr)=\partial\mathcal L_{\mathrm{QCD}}/\partial A^a_\nu`$ then reads
@@ -4258,22 +4405,22 @@ The Euler–Lagrange equation $`\partial_\mu\bigl(\partial\mathcal L_{\mathrm{QC
 \partial_\mu F^{a\mu\nu}+g_sf^{abc}A^b_\mu F^{c\mu\nu}=-g_sj^{a\nu}.
 }
 \right.
-\tag{4.50}
+\tag{3.50}
 ```
 
-The left-hand side is the $`a`$-component of $`\partial_\mu F^{\mu\nu}-ig_s[A_\mu,F^{\mu\nu}]`$, the covariant derivative of $`F^{\mu\nu}`$ in the adjoint representation; with $`j^\nu:=j^{a\nu}T^a`$, (4.50) is
+The left-hand side is the $`a`$-component of $`\partial_\mu F^{\mu\nu}-ig_s[A_\mu,F^{\mu\nu}]`$, the covariant derivative of $`F^{\mu\nu}`$ in the adjoint representation; with $`j^\nu:=j^{a\nu}T^a`$, (3.50) is
 
 ```math
 \left.
 D_\mu F^{\mu\nu}:=\partial_\mu F^{\mu\nu}-ig_s[A_\mu,F^{\mu\nu}]=-g_s\,j^\nu.
 \right.
-\tag{4.51}
+\tag{3.51}
 ```
 
 <br><br>
 
 <a id="higgs-mechanism"></a>
-### 4.4 Spontaneous Symmetry Breaking and the Higgs Mechanism
+### 3.4 Spontaneous Symmetry Breaking and the Higgs Mechanism
 
 <a id="higgs-lagrangian"></a>
 #### Higgs Lagrangian
@@ -4289,10 +4436,10 @@ V(\Phi)&=-\mu_H^2\,\Phi^\dagger\Phi+\lambda_H(\Phi^\dagger\Phi)^2 .
 \end{aligned}
 }
 \right.
-\tag{4.52}
+\tag{3.52}
 ```
 
-The Lagrangian (4.52) depends on $`\Phi`$ only through $`\Phi^\dagger\Phi`$ and $`(\partial_\mu\Phi)^\dagger\partial^\mu\Phi`$. For a constant $`g\in U(n)`$,
+The Lagrangian (3.52) depends on $`\Phi`$ only through $`\Phi^\dagger\Phi`$ and $`(\partial_\mu\Phi)^\dagger\partial^\mu\Phi`$. For a constant $`g\in U(n)`$,
 
 ```math
 \left.
@@ -4302,20 +4449,20 @@ The Lagrangian (4.52) depends on $`\Phi`$ only through $`\Phi^\dagger\Phi`$ and 
 (\partial_\mu\Phi')^\dagger\partial^\mu\Phi'&=(\partial_\mu\Phi)^\dagger g^\dagger g\,\partial^\mu\Phi=(\partial_\mu\Phi)^\dagger\partial^\mu\Phi,
 \end{aligned}
 \right.
-\tag{4.53}
+\tag{3.53}
 ```
 
 so $`\mathcal L_{\mathrm{Higgs}}`$ is invariant under global $`U(n)`$ transformations.
 
 **Physical Vacuum**
 
-The classical vacuum is the field configuration of minimum energy. The energy density of (4.52) is
+The classical vacuum is the field configuration of minimum energy. The energy density of (3.52) is
 
 ```math
 \left.
 \mathcal H=(\partial_0\Phi)^\dagger\partial_0\Phi+\sum_{i=1}^3(\partial_i\Phi)^\dagger\partial_i\Phi+V(\Phi).
 \right.
-\tag{4.54}
+\tag{3.54}
 ```
 
 The first two terms are nonnegative, so the classical vacuum is a constant $`\Phi=\Phi_0`$ minimizing $`V`$. Since $`\partial V/\partial(\Phi^\dagger\Phi)=-\mu_H^2+2\lambda_H\Phi^\dagger\Phi`$ and $`\Phi^\dagger\Phi\ge0`$,
@@ -4331,7 +4478,7 @@ V(\Phi_0)=-\frac{\lambda_Hv^4}{4}.
 \end{aligned}
 }
 \right.
-\tag{4.55}
+\tag{3.55}
 ```
 
 For $`\mu_H^2\le0`$ the vacuum $`\Phi_0=0`$ is invariant under all of $`U(n)`$. From now on $`\mu_H^2>0`$: the vacua form the sphere $`\Phi_0^\dagger\Phi_0=v^2/2`$ in $`\mathbb C^n`$, and $`\Phi=0`$ is a local maximum of $`V`$. The physical vacuum is a single point of this sphere. We choose
@@ -4342,12 +4489,12 @@ For $`\mu_H^2\le0`$ the vacuum $`\Phi_0=0`$ is invariant under all of $`U(n)`$. 
 \Phi_0:=\frac1{\sqrt2}\begin{pmatrix}0\\\vdots\\0\\v\end{pmatrix}
 }
 \right.
-\tag{4.56}
+\tag{3.56}
 ```
 
 and from now on $`\Phi_0`$ denotes this vacuum.
 
- Any vacuum $`\Phi_0'`$ with $`\Phi_0'^\dagger\Phi_0'=v^2/2`$ equals $`g\,\Phi_0`$, where $`g\in U(n)`$ has last column $`\sqrt2\,\Phi_0'/v`$ and its other columns complete it to an orthonormal basis of $`\mathbb C^n`$; by (4.53), different choices are related by a symmetry transformation.
+ Any vacuum $`\Phi_0'`$ with $`\Phi_0'^\dagger\Phi_0'=v^2/2`$ equals $`g\,\Phi_0`$, where $`g\in U(n)`$ has last column $`\sqrt2\,\Phi_0'/v`$ and its other columns complete it to an orthonormal basis of $`\mathbb C^n`$; by (3.53), different choices are related by a symmetry transformation.
 
 <br><br>
 
@@ -4362,12 +4509,12 @@ A transformation $`g\in U(n)`$ is unbroken if it leaves the vacuum invariant. Th
 G_0:=\{g\in U(n)\mid g\,\Phi_0=\Phi_0\}\cong U(n-1).
 }
 \right.
-\tag{4.57}
+\tag{3.57}
 ```
 
 A unitary $`g`$ with $`g\Phi_0=\Phi_0`$ maps the orthogonal complement $`\Phi_0^\perp:=\{u\in\mathbb C^n\mid\Phi_0^\dagger u=0\}`$ to itself, and $`g\mapsto g|_{\Phi_0^\perp}`$ identifies $`G_0`$ with the unitary group of the $`(n-1)`$-dimensional space $`\Phi_0^\perp`$.
 
-$`U(n)`$ is spontaneously broken to $`G_0`$ if $`G_0\neq U(n)`$, i.e. if the Lagrangian is invariant under $`U(n)`$ but the vacuum is not; by (4.57), $`U(n)`$ is spontaneously broken to $`G_0\cong U(n-1)`$.
+$`U(n)`$ is spontaneously broken to $`G_0`$ if $`G_0\neq U(n)`$, i.e. if the Lagrangian is invariant under $`U(n)`$ but the vacuum is not; by (3.57), $`U(n)`$ is spontaneously broken to $`G_0\cong U(n-1)`$.
 
 Let $`T^a`$, $`a=1,\ldots,n^2`$, be Hermitian generators of $`U(n)`$ with $`\mathop{\rm tr}\nolimits (T^aT^b)=\frac12\delta^{ab}`$. A Hermitian $`n\times n`$ matrix $`T`$ is an unbroken generator if $`e^{i\theta T}\in G_0`$ for all $`\theta\in\mathbb R`$; differentiating $`e^{i\theta T}\Phi_0=\Phi_0`$ at $`\theta=0`$,
 
@@ -4376,7 +4523,7 @@ Let $`T^a`$, $`a=1,\ldots,n^2`$, be Hermitian generators of $`U(n)`$ with $`\mat
 e^{i\theta T}\in G_0\ \ \text{for all }\theta\in\mathbb R
 \iff T\Phi_0=0 .
 \right.
-\tag{4.58}
+\tag{3.58}
 ```
 
 The unbroken generators form the Lie algebra of $`G_0\cong U(n-1)`$, of dimension $`(n-1)^2`$, and the broken generators are the elements of its orthogonal complement under $`\mathop{\rm tr}\nolimits\,`$, of dimension $`n^2-(n-1)^2=2n-1`$. A broken $`T\neq0`$ satisfies $`T\Phi_0\neq0`$: otherwise $`T`$ would also be unbroken, and $`\mathop{\rm tr}\nolimits (T^2)=0`$.
@@ -4391,7 +4538,7 @@ Let $`G^a`$, $`a=1,\ldots,2n-1`$, be a basis of the broken generators. The matri
 \Phi_0^\dagger(G^a)^2\Phi_0=(G^a\Phi_0)^\dagger G^a\Phi_0>0 .
 \end{aligned}
 \right.
-\tag{4.59}
+\tag{3.59}
 ```
 
 From now on $`T^a:=G^a`$ for $`a=1,\ldots,2n-1`$, and $`T^a`$, $`a=2n,\ldots,n^2`$, span the unbroken generators.
@@ -4411,7 +4558,7 @@ U(\theta)&:=e^{iX},\qquad X:=\theta^a(x)G^a .
 \end{aligned}
 }
 \right.
-\tag{4.60}
+\tag{3.60}
 ```
 
 <br><br>
@@ -4419,7 +4566,7 @@ U(\theta)&:=e^{iX},\qquad X:=\theta^a(x)G^a .
 <a id="higgs-mechanism-masses"></a>
 #### Higgs Mechanism
 
-Gauge the $`U(n)`$ symmetry (4.53) with the generators $`T^a`$, $`a=1,\ldots,n^2`$, chosen after (4.59), gauge fields $`A_\mu^a`$, and coupling $`g_{\mathrm{YM}}`$ as in (4.19). Replacing $`\partial_\mu`$ by $`D_\mu`$ in (4.52) and adding the gauge kinetic term of (4.21),
+Gauge the $`U(n)`$ symmetry (3.53) with the generators $`T^a`$, $`a=1,\ldots,n^2`$, chosen after (3.59), gauge fields $`A_\mu^a`$, and coupling $`g_{\mathrm{YM}}`$ as in (3.19). Replacing $`\partial_\mu`$ by $`D_\mu`$ in (3.52) and adding the gauge kinetic term of (3.21),
 
 ```math
 \left.
@@ -4430,12 +4577,12 @@ D_\mu\Phi&=\partial_\mu\Phi-ig_{\mathrm{YM}}A_\mu\Phi,\qquad A_\mu:=A_\mu^aT^a .
 \end{aligned}
 }
 \right.
-\tag{4.61}
+\tag{3.61}
 ```
 
-By (4.19)–(4.20) with $`T^a`$ the generators of $`U(n)`$, $`\mathcal L`$ is invariant under $`\Phi'=U(\theta)\Phi`$, $`U(\theta)=e^{i\theta^a(x)T^a}`$; for $`\theta^a=0`$, $`a\ge2n`$, this is the $`U(\theta)`$ of (4.60).
+By (3.19)–(3.20) with $`T^a`$ the generators of $`U(n)`$, $`\mathcal L`$ is invariant under $`\Phi'=U(\theta)\Phi`$, $`U(\theta)=e^{i\theta^a(x)T^a}`$; for $`\theta^a=0`$, $`a\ge2n`$, this is the $`U(\theta)`$ of (3.60).
 
-Substitute the parametrization (4.60) into (4.61). With $`\mu_H^2=\lambda_Hv^2`$ from (4.55) and $`U^\dagger U=I_n`$, the potential depends only on $`h`$:
+Substitute the parametrization (3.60) into (3.61). With $`\mu_H^2=\lambda_Hv^2`$ from (3.55) and $`U^\dagger U=I_n`$, the potential depends only on $`h`$:
 
 ```math
 \left.
@@ -4445,7 +4592,7 @@ V&=\lambda_H\Bigl(\Phi^\dagger\Phi-\frac{v^2}2\Bigr)^2-\frac{\lambda_Hv^4}4\\
 &=\lambda_Hv^2h^2+\lambda_Hv\,h^3+\frac{\lambda_H}4h^4-\frac{\lambda_Hv^4}4 .
 \end{aligned}
 \right.
-\tag{4.62}
+\tag{3.62}
 ```
 
 For the kinetic term, $`\Phi_0^\dagger\Phi_0=v^2/2`$, and since $`A^U_\mu`$ below is Hermitian, the terms linear in $`\partial_\mu h`$ cancel:
@@ -4459,10 +4606,10 @@ A^U_\mu&:=U^\dagger A_\mu U+\frac i{g_{\mathrm{YM}}}U^\dagger\partial_\mu U,\\
 &\quad+\Bigl(1+\frac hv\Bigr)^2g_{\mathrm{YM}}^2\,\Phi_0^\dagger A^U_\mu A^{U\mu}\Phi_0 .
 \end{aligned}
 \right.
-\tag{4.63}
+\tag{3.63}
 ```
 
-Substituting (4.62) and (4.63) into (4.61),
+Substituting (3.62) and (3.63) into (3.61),
 
 ```math
 \left.
@@ -4476,10 +4623,10 @@ m_h^2={}&2\lambda_Hv^2=2\mu_H^2 .
 \end{aligned}
 }
 \right.
-\tag{4.64}
+\tag{3.64}
 ```
 
-Since $`U^\dagger\partial_\mu U=i\partial_\mu X+O(\theta\,\partial\theta)`$, to first order $`A^U_\mu=A_\mu-\partial_\mu X/g_{\mathrm{YM}}`$. As $`T^a\Phi_0=0`$ for $`a\ge2n`$, by (4.59) the quadratic part of $`g_{\mathrm{YM}}^2\Phi_0^\dagger A^U_\mu A^{U\mu}\Phi_0`$ is
+Since $`U^\dagger\partial_\mu U=i\partial_\mu X+O(\theta\,\partial\theta)`$, to first order $`A^U_\mu=A_\mu-\partial_\mu X/g_{\mathrm{YM}}`$. As $`T^a\Phi_0=0`$ for $`a\ge2n`$, by (3.59) the quadratic part of $`g_{\mathrm{YM}}^2\Phi_0^\dagger A^U_\mu A^{U\mu}\Phi_0`$ is
 
 ```math
 \left.
@@ -4489,10 +4636,10 @@ Since $`U^\dagger\partial_\mu U=i\partial_\mu X+O(\theta\,\partial\theta)`$, to 
 &m_a^2:=2g_{\mathrm{YM}}^2\,\Phi_0^\dagger(G^a)^2\Phi_0>0 .
 \end{aligned}
 \right.
-\tag{4.65}
+\tag{3.65}
 ```
 
-The $`A_\mu^a`$ with $`a\ge2n`$ do not appear in (4.65). Since $`U(\theta)\in U(n)`$, the gauge transformation (4.19)–(4.20) with $`U(\theta)^{-1}=U(\theta)^\dagger`$ gives
+The $`A_\mu^a`$ with $`a\ge2n`$ do not appear in (3.65). Since $`U(\theta)\in U(n)`$, the gauge transformation (3.19)–(3.20) with $`U(\theta)^{-1}=U(\theta)^\dagger`$ gives
 
 ```math
 \left.
@@ -4502,10 +4649,10 @@ A'_\mu&=U^\dagger A_\mu U-\frac i{g_{\mathrm{YM}}}\bigl(\partial_\mu U^\dagger\b
 F'_{\mu\nu}&=U^\dagger F_{\mu\nu}U .
 \end{aligned}
 \right.
-\tag{4.66}
+\tag{3.66}
 ```
 
-By gauge invariance, $`\mathcal L`$ equals (4.64) with $`\theta^a=0`$ and $`A_\mu`$ replaced by $`A'_\mu`$. With (4.59),
+By gauge invariance, $`\mathcal L`$ equals (3.64) with $`\theta^a=0`$ and $`A_\mu`$ replaced by $`A'_\mu`$. With (3.59),
 
 ```math
 \left.
@@ -4518,23 +4665,23 @@ By gauge invariance, $`\mathcal L`$ equals (4.64) with $`\theta^a=0`$ and $`A_\m
 \end{aligned}
 }
 \right.
-\tag{4.67}
+\tag{3.67}
 ```
 
-The $`\theta^a`$ no longer appear. To first order $`A'^a_\mu=A^a_\mu-\partial_\mu\theta^a/g_{\mathrm{YM}}`$ for $`a\le2n-1`$, so the quadratic part of the mass term in (4.67) is (4.65). Comparing with (1.85) and (1.135):
+The $`\theta^a`$ no longer appear. To first order $`A'^a_\mu=A^a_\mu-\partial_\mu\theta^a/g_{\mathrm{YM}}`$ for $`a\le2n-1`$, so the quadratic part of the mass term in (3.67) is (3.65). Comparing with (1.85) and (1.135):
 
-- the Higgs field $`h`$ has mass $`m_h`$ of (4.64);
-- the $`2n-1`$ gauge fields $`A'^a_\mu`$, $`a\le2n-1`$, along the broken generators have masses $`m_a`$ of (4.65);
+- the Higgs field $`h`$ has mass $`m_h`$ of (3.64);
+- the $`2n-1`$ gauge fields $`A'^a_\mu`$, $`a\le2n-1`$, along the broken generators have masses $`m_a`$ of (3.65);
 - the $`(n-1)^2`$ gauge fields $`A'^a_\mu`$, $`a\ge2n`$, along the unbroken generators are massless.
 
-For $`n=2`$ and $`g_2=g_1=g_{\mathrm{YM}}`$, the $`m_a`$ are $`m_W`$, $`m_W`$ and $`m_Z`$ of (4.81).
+For $`n=2`$ and $`g_2=g_1=g_{\mathrm{YM}}`$, the $`m_a`$ are $`m_W`$, $`m_W`$ and $`m_Z`$ of (3.81).
 
 
 <br><br>
 
 <a id="electroweak-gauge-theory"></a>
 <a id="electroweak-theory"></a>
-### 4.5 Electroweak Theory
+### 3.5 Electroweak Theory
 
 <a id="sm-leptons"></a>
 #### Leptons in the Standard Model
@@ -4548,10 +4695,10 @@ The gauge group of the electroweak theory is $`SU(2)_L\times U(1)_Y`$. On an $`S
 Q&:=T^3+Y,
 \end{aligned}
 \right.
-\tag{4.68}
+\tag{3.68}
 ```
 
-where $`Q`$ is the electric charge in units of $`e`$, as in (4.23).
+where $`Q`$ is the electric charge in units of $`e`$, as in (3.23).
 
 The leptons come in three generations, labeled by the flavor index $`\alpha=e,\mu,\tau`$. With pairs denoting ($`SU(2)_L`$ representation, $`Y`$),
 
@@ -4565,7 +4712,7 @@ Q\,\nu_{\alpha L}&=0,\qquad Q\,l_{\alpha L}=-l_{\alpha L},\qquad Q\,E_{\alpha R}
 \end{aligned}
 }
 \right.
-\tag{4.69}
+\tag{3.69}
 ```
 
 The fields are four-component spinors with $`P_L\nu_{\alpha L}=\nu_{\alpha L}`$, $`P_Ll_{\alpha L}=l_{\alpha L}`$ and $`P_RE_{\alpha R}=E_{\alpha R}`$, where $`P_{L,R}`$ are given in (1.131). The leptons are color singlets. The minimal renormalizable Standard Model contains no right-handed neutrino.
@@ -4575,7 +4722,7 @@ The fields are four-component spinors with $`P_L\nu_{\alpha L}=\nu_{\alpha L}`$,
 <a id="electroweak-kinetic-terms"></a>
 #### Kinetic Terms
 
-Let $`W_\mu^a`$, $`a=1,2,3`$, and $`B_\mu`$ be the real $`SU(2)_L`$ and $`U(1)_Y`$ gauge fields, and $`g_2,g_1>0`$ the couplings. With $`U(\theta):=e^{i\theta^a(x)\sigma^a/2}`$ and $`W_\mu:=W_\mu^a\sigma^a/2`$, (4.19) with $`g_{\mathrm{YM}}\to g_2`$ and (4.24) with $`eQ\to g_1Y`$ give
+Let $`W_\mu^a`$, $`a=1,2,3`$, and $`B_\mu`$ be the real $`SU(2)_L`$ and $`U(1)_Y`$ gauge fields, and $`g_2,g_1>0`$ the couplings. With $`U(\theta):=e^{i\theta^a(x)\sigma^a/2}`$ and $`W_\mu:=W_\mu^a\sigma^a/2`$, (3.19) with $`g_{\mathrm{YM}}\to g_2`$ and (3.24) with $`eQ\to g_1Y`$ give
 
 ```math
 \left.
@@ -4587,10 +4734,10 @@ B_\mu'=B_\mu+\frac1{g_1}\partial_\mu\theta_Y,
 \end{aligned}
 }
 \right.
-\tag{4.70}
+\tag{3.70}
 ```
 
-so that $`D_\mu'\psi'=e^{i\theta^aT^a+i\theta_YY}D_\mu\psi`$ under (4.68). The field strengths are
+so that $`D_\mu'\psi'=e^{i\theta^aT^a+i\theta_YY}D_\mu\psi`$ under (3.68). The field strengths are
 
 ```math
 \left.
@@ -4600,17 +4747,17 @@ B_{\mu\nu}:=\partial_\mu B_\nu-\partial_\nu B_\mu,\\
 [D_\mu,D_\nu]&=-ig_2W_{\mu\nu}^aT^a-ig_1YB_{\mu\nu}.
 \end{aligned}
 \right.
-\tag{4.71}
+\tag{3.71}
 ```
 
-On the lepton fields (4.69), the covariant derivative (4.70) is
+On the lepton fields (3.69), the covariant derivative (3.70) is
 
 ```math
 \left.
 D_\mu\ell_{\alpha L}=\Bigl(\partial_\mu-ig_2W_\mu^a\frac{\sigma^a}2+\frac i2g_1B_\mu\Bigr)\ell_{\alpha L},\qquad
 D_\mu E_{\alpha R}=\bigl(\partial_\mu+ig_1B_\mu\bigr)E_{\alpha R}.
 \right.
-\tag{4.72}
+\tag{3.72}
 ```
 
 The kinetic terms of the Lagrangian density are
@@ -4626,17 +4773,17 @@ The kinetic terms of the Lagrangian density are
 \end{aligned}
 }
 \right.
-\tag{4.73}
+\tag{3.73}
 ```
 
-By (4.20), (4.24) and (4.70), $`\mathcal L_{\mathrm{kin}}`$ is gauge invariant.
+By (3.20), (3.24) and (3.70), $`\mathcal L_{\mathrm{kin}}`$ is gauge invariant.
 
 <br><br>
 
 <a id="charged-lepton-masses"></a>
 #### Yukawa Couplings and Charged-Lepton Masses
 
-The Higgs doublet $`H=:(H^+,H^0)^T\sim(\mathbf2,\frac12)`$ is a color singlet. It is the $`\Phi`$ of (4.52) with $`n=2`$ and $`\mu_H^2>0`$, with $`\partial_\mu`$ replaced by (4.70). As $`\theta^a`$ and $`\theta_Y`$ vary, $`e^{i\theta^a\sigma^a/2+i\theta_Y/2}`$ covers $`U(2)`$, so by (4.56), (4.60) and (4.66)
+The Higgs doublet $`H=:(H^+,H^0)^T\sim(\mathbf2,\frac12)`$ is a color singlet. It is the $`\Phi`$ of (3.52) with $`n=2`$ and $`\mu_H^2>0`$, with $`\partial_\mu`$ replaced by (3.70). As $`\theta^a`$ and $`\theta_Y`$ vary, $`e^{i\theta^a\sigma^a/2+i\theta_Y/2}`$ covers $`U(2)`$, so by (3.56), (3.60) and (3.66)
 
 ```math
 \left.
@@ -4647,12 +4794,12 @@ V(H)=-\mu_H^2H^\dagger H+\lambda_H(H^\dagger H)^2,\\
 H\big|_{\mathrm{unitary\ gauge}}=\frac1{\sqrt2}\begin{pmatrix}0\\v+h\end{pmatrix}.
 \end{aligned}
 \right.
-\tag{4.74}
+\tag{3.74}
 ```
 
-The Higgs field $`h`$ has the mass $`m_h`$ of (4.64).
+The Higgs field $`h`$ has the mass $`m_h`$ of (3.64).
 
-Let $`y_l`$ be a complex $`3\times3`$ matrix; repeated flavor indices $`\alpha,\beta`$ are summed. The lepton Yukawa coupling is invariant under (4.68):
+Let $`y_l`$ be a complex $`3\times3`$ matrix; repeated flavor indices $`\alpha,\beta`$ are summed. The lepton Yukawa coupling is invariant under (3.68):
 
 ```math
 \left.
@@ -4664,24 +4811,24 @@ Let $`y_l`$ be a complex $`3\times3`$ matrix; repeated flavor indices $`\alpha,\
 =\overline{\ell_{\alpha L}}HE_{\beta R}.
 \end{aligned}
 \right.
-\tag{4.75}
+\tag{3.75}
 ```
 
-In the unitary gauge (4.74), $`H^+=0`$ and
+In the unitary gauge (3.74), $`H^+=0`$ and
 
 ```math
 \left.
 \mathcal L_Y^\ell=-\Bigl(1+\frac hv\Bigr)\overline{l_{\alpha L}}\,(M_l)_{\alpha\beta}\,E_{\beta R}+\mathrm{h.c.},\qquad
 M_l:=\frac v{\sqrt2}\,y_l .
 \right.
-\tag{4.76}
+\tag{3.76}
 ```
 
-The neutrinos $`\nu_{\alpha L}`$ do not appear in (4.76).
+The neutrinos $`\nu_{\alpha L}`$ do not appear in (3.76).
 
 **Flavor Basis**
 
-Write $`\ell_L:=(\ell_{eL},\ell_{\mu L},\ell_{\tau L})^T`$ and $`E_R:=(E_{eR},E_{\mu R},E_{\tau R})^T`$ in flavor space. For constant $`R_\ell,R_E\in U(3)`$, (4.73) is invariant under the change of basis in the first line below, and the singular value decomposition of $`M_l`$ fixes $`R_\ell`$ and $`R_E`$ by the second line:
+Write $`\ell_L:=(\ell_{eL},\ell_{\mu L},\ell_{\tau L})^T`$ and $`E_R:=(E_{eR},E_{\mu R},E_{\tau R})^T`$ in flavor space. For constant $`R_\ell,R_E\in U(3)`$, (3.73) is invariant under the change of basis in the first line below, and the singular value decomposition of $`M_l`$ fixes $`R_\ell`$ and $`R_E`$ by the second line:
 
 ```math
 \left.
@@ -4690,10 +4837,10 @@ Write $`\ell_L:=(\ell_{eL},\ell_{\mu L},\ell_{\tau L})^T`$ and $`E_R:=(E_{eR},E_
 R_\ell^\dagger M_lR_E&=\mathop{\rm diag}\nolimits (m_e,m_\mu,m_\tau),\qquad m_\alpha\ge0 .
 \end{aligned}
 \right.
-\tag{4.77}
+\tag{3.77}
 ```
 
-From now on we use this basis. With the Dirac fields $`l_\alpha:=l_{\alpha L}+E_{\alpha R}`$, (4.76) becomes
+From now on we use this basis. With the Dirac fields $`l_\alpha:=l_{\alpha L}+E_{\alpha R}`$, (3.76) becomes
 
 ```math
 \left.
@@ -4704,17 +4851,17 @@ M_l&=\mathop{\rm diag}\nolimits (m_e,m_\mu,m_\tau),\\
 \end{aligned}
 }
 \right.
-\tag{4.78}
+\tag{3.78}
 ```
 
-Since $`\overline{l_{\alpha L}}\,i\gamma^\mu\partial_\mu l_{\alpha L}+\overline{E_{\alpha R}}\,i\gamma^\mu\partial_\mu E_{\alpha R}=\bar l_\alpha\,i\gamma^\mu\partial_\mu l_\alpha`$, the free part of (4.73) and (4.78) contain the Dirac Lagrangian (1.94) of each $`l_\alpha`$ with mass $`m_\alpha`$. Thus the charged leptons $`l_e,l_\mu,l_\tau`$ are Dirac fields of masses $`m_e,m_\mu,m_\tau`$, coupled to $`h`$ with strength $`m_\alpha/v`$, while the neutrinos $`\nu_{\alpha L}`$ remain massless.
+Since $`\overline{l_{\alpha L}}\,i\gamma^\mu\partial_\mu l_{\alpha L}+\overline{E_{\alpha R}}\,i\gamma^\mu\partial_\mu E_{\alpha R}=\bar l_\alpha\,i\gamma^\mu\partial_\mu l_\alpha`$, the free part of (3.73) and (3.78) contain the Dirac Lagrangian (1.94) of each $`l_\alpha`$ with mass $`m_\alpha`$. Thus the charged leptons $`l_e,l_\mu,l_\tau`$ are Dirac fields of masses $`m_e,m_\mu,m_\tau`$, coupled to $`h`$ with strength $`m_\alpha/v`$, while the neutrinos $`\nu_{\alpha L}`$ remain massless.
 
 <br><br>
 
 <a id="gauge-boson-masses"></a>
 #### Gauge-Boson Masses
 
-Substituting the unitary-gauge $`H`$ of (4.74) into (4.70), with $`T^a=\sigma^a/2`$ and $`Y=\frac12`$,
+Substituting the unitary-gauge $`H`$ of (3.74) into (3.70), with $`T^a=\sigma^a/2`$ and $`Y=\frac12`$,
 
 ```math
 \left.
@@ -4725,7 +4872,7 @@ D_\mu H&=\frac1{\sqrt2}\begin{pmatrix}-\frac i2g_2\bigl(W_\mu^1-iW_\mu^2\bigr)(v
 &\qquad+\bigl(g_2W_\mu^3-g_1B_\mu\bigr)\bigl(g_2W^{3\mu}-g_1B^\mu\bigr)\Bigr].
 \end{aligned}
 \right.
-\tag{4.79}
+\tag{3.79}
 ```
 
 Define
@@ -4741,7 +4888,7 @@ A_\mu^{\mathrm{em}}:=s_WW_\mu^3+c_WB_\mu,\qquad
 e:=g_2s_W=g_1c_W .
 \end{aligned}
 \right.
-\tag{4.80}
+\tag{3.80}
 ```
 
 Then $`W_\mu^1W^{1\mu}+W_\mu^2W^{2\mu}=2W_\mu^+W^{-\mu}`$ and $`g_2W_\mu^3-g_1B_\mu=\sqrt{g_2^2+g_1^2}\,Z_\mu`$, so
@@ -4759,17 +4906,17 @@ m_\gamma=0,\\
 \end{aligned}
 }
 \right.
-\tag{4.81}
+\tag{3.81}
 ```
 
-$`A_\mu^{\mathrm{em}}`$ does not appear in (4.81).
+$`A_\mu^{\mathrm{em}}`$ does not appear in (3.81).
 
 <br><br>
 
 <a id="sm-quarks"></a>
 #### Quarks
 
-The quarks come in three generations, $`r=1,2,3`$, and are color triplets as in (4.32). With the pairs as in (4.69),
+The quarks come in three generations, $`r=1,2,3`$, and are color triplets as in (3.32). With the pairs as in (3.69),
 
 ```math
 \left.
@@ -4780,10 +4927,10 @@ d_{rR}\sim\Bigl(\mathbf1,-\frac13\Bigr),\\
 Q\,u_{rL}&=\frac23u_{rL},\qquad Q\,d_{rL}=-\frac13d_{rL}.
 \end{aligned}
 \right.
-\tag{4.82}
+\tag{3.82}
 ```
 
-With $`D_\mu`$ of (4.70) plus the gluon term $`-ig_sA_\mu`$ of (4.36), the quark kinetic terms are
+With $`D_\mu`$ of (3.70) plus the gluon term $`-ig_sA_\mu`$ of (3.36), the quark kinetic terms are
 
 ```math
 \left.
@@ -4791,10 +4938,10 @@ With $`D_\mu`$ of (4.70) plus the gluon term $`-ig_sA_\mu`$ of (4.36), the quark
 +\overline{u_{rR}}\,i\gamma^\mu D_\mu u_{rR}
 +\overline{d_{rR}}\,i\gamma^\mu D_\mu d_{rR}\Bigr).
 \right.
-\tag{4.83}
+\tag{3.83}
 ```
 
-Let $`y_u,y_d`$ be complex $`3\times3`$ matrices, $`H^c:=i\sigma^2H^*\sim(\mathbf2,-\frac12)`$, and $`u_L:=(u_{1L},u_{2L},u_{3L})^T`$, and similarly $`u_R`$, $`d_L`$, $`d_R`$, in flavor space. Summing over $`r,s`$, the quark Yukawa couplings are gauge invariant, and in the unitary gauge (4.74)
+Let $`y_u,y_d`$ be complex $`3\times3`$ matrices, $`H^c:=i\sigma^2H^*\sim(\mathbf2,-\frac12)`$, and $`u_L:=(u_{1L},u_{2L},u_{3L})^T`$, and similarly $`u_R`$, $`d_L`$, $`d_R`$, in flavor space. Summing over $`r,s`$, the quark Yukawa couplings are gauge invariant, and in the unitary gauge (3.74)
 
 ```math
 \left.
@@ -4805,7 +4952,7 @@ H^c\big|_{\mathrm{unitary\ gauge}}=\frac1{\sqrt2}\begin{pmatrix}v+h\\0\end{pmatr
 M_{u,d}:=\frac v{\sqrt2}\,y_{u,d}.
 \end{aligned}
 \right.
-\tag{4.84}
+\tag{3.84}
 ```
 
 **Mass Basis and CKM Matrix**
@@ -4825,17 +4972,17 @@ V_{\mathrm{CKM}}:=R_{uL}^\dagger R_{dL},\\
 \end{aligned}
 }
 \right.
-\tag{4.85}
+\tag{3.85}
 ```
 
-with $`m_f\ge0`$; the $`q_f`$ are the quark fields of (4.32), and the $`m_f`$ are the masses in (4.45).
+with $`m_f\ge0`$; the $`q_f`$ are the quark fields of (3.32), and the $`m_f`$ are the masses in (3.45).
 
 <br><br>
 
 <a id="electroweak-currents"></a>
 #### Charged and Neutral Currents
 
-The gauge-field terms of $`\bar\psi\,i\gamma^\mu D_\mu\psi`$ are $`\bar\psi\gamma^\mu(g_2W_\mu^aT^a+g_1YB_\mu)\psi`$. By (4.80), with $`T^\pm:=T^1\pm iT^2`$,
+The gauge-field terms of $`\bar\psi\,i\gamma^\mu D_\mu\psi`$ are $`\bar\psi\gamma^\mu(g_2W_\mu^aT^a+g_1YB_\mu)\psi`$. By (3.80), with $`T^\pm:=T^1\pm iT^2`$,
 
 ```math
 \left.
@@ -4844,10 +4991,10 @@ g_2W_\mu^aT^a+g_1YB_\mu
 +eQA_\mu^{\mathrm{em}}
 +\frac{g_2}{c_W}\bigl(T^3-s_W^2Q\bigr)Z_\mu .
 \right.
-\tag{4.86}
+\tag{3.86}
 ```
 
-Since $`\overline{\ell_{\alpha L}}\gamma^\mu T^+\ell_{\alpha L}=\overline{\nu_{\alpha L}}\gamma^\mu l_{\alpha L}`$ and, by (4.85), $`\overline{q_{rL}}\gamma^\mu T^+q_{rL}=\overline{u_L}\gamma^\mu d_L=\overline{u_L'}\gamma^\mu V_{\mathrm{CKM}}\,d_L'`$, the $`W_\mu^\pm`$ terms of (4.73) and (4.83) are, with $`q_{fL}:=P_Lq_f`$ and the rows and columns of $`V:=V_{\mathrm{CKM}}`$ labeled by $`f=u,c,t`$ and $`f'=d,s,b`$,
+Since $`\overline{\ell_{\alpha L}}\gamma^\mu T^+\ell_{\alpha L}=\overline{\nu_{\alpha L}}\gamma^\mu l_{\alpha L}`$ and, by (3.85), $`\overline{q_{rL}}\gamma^\mu T^+q_{rL}=\overline{u_L}\gamma^\mu d_L=\overline{u_L'}\gamma^\mu V_{\mathrm{CKM}}\,d_L'`$, the $`W_\mu^\pm`$ terms of (3.73) and (3.83) are, with $`q_{fL}:=P_Lq_f`$ and the rows and columns of $`V:=V_{\mathrm{CKM}}`$ labeled by $`f=u,c,t`$ and $`f'=d,s,b`$,
 
 ```math
 \left.
@@ -4857,10 +5004,10 @@ Since $`\overline{\ell_{\alpha L}}\gamma^\mu T^+\ell_{\alpha L}=\overline{\nu_{\
 +\sum_{f=u,c,t}\ \sum_{f'=d,s,b}V_{ff'}\,\overline{q_{fL}}\gamma^\mu q_{f'L}\Bigr)+\mathrm{h.c.}
 }
 \right.
-\tag{4.87}
+\tag{3.87}
 ```
 
-Let $`\psi_f`$ be the field of the fermion $`f`$ of (4.23) in the bases (4.77) and (4.85): $`\psi_f=q_f`$ for the quarks, $`\psi_f=l_f`$ for $`f=e,\mu,\tau`$, and $`\psi_{\nu_\alpha}=\nu_{\alpha L}`$. Let $`T_f^3`$ be $`T^3`$ of its left-handed part: $`+\frac12`$ for $`q_u,q_c,q_t`$ and $`\nu_{\alpha L}`$, and $`-\frac12`$ for $`q_d,q_s,q_b`$ and $`l_\alpha`$. The $`A_\mu^{\mathrm{em}}`$ and $`Z_\mu`$ terms are
+Let $`\psi_f`$ be the field of the fermion $`f`$ of (3.23) in the bases (3.77) and (3.85): $`\psi_f=q_f`$ for the quarks, $`\psi_f=l_f`$ for $`f=e,\mu,\tau`$, and $`\psi_{\nu_\alpha}=\nu_{\alpha L}`$. Let $`T_f^3`$ be $`T^3`$ of its left-handed part: $`+\frac12`$ for $`q_u,q_c,q_t`$ and $`\nu_{\alpha L}`$, and $`-\frac12`$ for $`q_d,q_s,q_b`$ and $`l_\alpha`$. The $`A_\mu^{\mathrm{em}}`$ and $`Z_\mu`$ terms are
 
 ```math
 \left.
@@ -4872,11 +5019,742 @@ Let $`\psi_f`$ be the field of the fermion $`f`$ of (4.23) in the bases (4.77) a
 \end{aligned}
 }
 \right.
-\tag{4.88}
+\tag{3.88}
 ```
 
-The first line is the interaction term of (4.26) with $`A_\mu=A_\mu^{\mathrm{em}}`$. The neutral currents are flavor diagonal at tree level.
+The first line is the interaction term of (3.26) with $`A_\mu=A_\mu^{\mathrm{em}}`$. The neutral currents are flavor diagonal at tree level.
 
+
+<br><br>
+
+<a id="qft-ch4"></a>
+## 4. Path Integrals
+
+<a id="path-integrals-in-quantum-mechanics"></a>
+### 4.1 Path Integrals in Quantum Mechanics
+
+**Principle**
+
+Consider a system with $`n`$ degrees of freedom.
+
+- **Configuration space**: $`\mathrm{Conf}=\mathbb R^n`$.
+- **Dynamical structure**: the Lagrangian
+
+```math
+\left.
+\begin{aligned}
+L:\mathbb R^n\times\mathbb R^n&\to\mathbb R,\\
+(x,y)&\mapsto\sum_{a=1}^n\frac12m_ay_a^2-V(x),
+\end{aligned}
+\right.
+\tag{4.1}
+```
+
+in which $`m_a>0`$ and $`V:\mathbb R^n\to\mathbb R`$ is smooth.
+
+- **Paths**: for $`t_i<t_f`$,
+
+```math
+\left.
+\begin{aligned}
+C:[t_i,t_f]&\to\mathrm{Conf},\\
+t&\mapsto C(t).
+\end{aligned}
+\right.
+\tag{4.2}
+```
+
+- **Action**: the functional on paths
+
+```math
+\left.
+\begin{aligned}
+S:\{\text{paths}\}&\to\mathbb R,\\
+C&\mapsto S[C]:=\int_{t_i}^{t_f}dt\,L\bigl(C(t),\dot C(t)\bigr).
+\end{aligned}
+\right.
+\tag{4.3}
+```
+
+**Quantization**
+
+- **Initial configuration**:
+
+```math
+\left.
+\begin{aligned}
+Q_i:\{t_i\}&\to\mathrm{Conf},\\
+t_i&\mapsto q_i.
+\end{aligned}
+\right.
+\tag{4.4}
+```
+
+- **Final configuration**:
+
+```math
+\left.
+\begin{aligned}
+Q_f:\{t_f\}&\to\mathrm{Conf},\\
+t_f&\mapsto q_f.
+\end{aligned}
+\right.
+\tag{4.5}
+```
+
+- **Transition kernel**: the integral over the paths with these endpoints,
+
+```math
+\left.
+\boxed{K(Q_f,Q_i):=\int_{C(t_i)=Q_i(t_i)}^{C(t_f)=Q_f(t_f)}\mathcal DC\,e^{iS[C]},}
+\right.
+\tag{4.6}
+```
+
+also written $`\int_{Q_i}^{Q_f}\mathcal DC\,e^{iS[C]}`$.
+
+**Exact Definition of the Transition Kernel**
+
+Divide $`[t_i,t_f]`$ into $`N+1`$ steps.
+
+- **Measure**:
+
+```math
+\left.
+\begin{gathered}
+\Delta t:=\frac{t_f-t_i}{N+1},\qquad t_k:=t_i+k\,\Delta t\quad(k=0,\ldots,N+1),\\
+\mathcal DC:=\lim_{N\to\infty}\mathcal N_N\prod_{k=1}^Nd^nC(t_k),\qquad
+\mathcal N_N:=\prod_{a=1}^n\Bigl(\frac{m_a}{2\pi i\,\Delta t}\Bigr)^{\frac{N+1}{2}},
+\end{gathered}
+\right.
+\tag{4.7}
+```
+
+so that $`t_0=t_i`$ and $`t_{N+1}=t_f`$, with $`d^nC(t_k):=\prod_{a=1}^ndC_a(t_k)`$.
+
+- **Action**:
+
+```math
+\left.
+S[C]=\lim_{N\to\infty}\Delta t\sum_{k=0}^NL\Bigl(C(t_k),\frac{C(t_{k+1})-C(t_k)}{\Delta t}\Bigr).
+\right.
+\tag{4.8}
+```
+
+Thus (4.6) means
+
+```math
+\left.
+\boxed{
+K(Q_f,Q_i)=\lim_{N\to\infty}\mathcal N_N\int\prod_{k=1}^Nd^nC(t_k)\,
+\exp\biggl[i\,\Delta t\sum_{k=0}^NL\Bigl(C(t_k),\frac{C(t_{k+1})-C(t_k)}{\Delta t}\Bigr)\biggr],}
+\right.
+\tag{4.9}
+```
+
+with $`C(t_0):=q_i`$, $`C(t_{N+1}):=q_f`$, and each $`C(t_k)`$, $`1\le k\le N`$, integrated over $`\mathrm{Conf}`$.
+
+**Functional Derivative**
+
+For a source $`J:[t_i,t_f]\to\mathbb R^n`$, with $`J\cdot C:=\sum_{a=1}^nJ_aC_a`$,
+
+```math
+\left.
+K^J(Q_f,Q_i):=\int_{Q_i}^{Q_f}\mathcal DC\,\exp\Bigl(i\int_{t_i}^{t_f}dt\,\bigl[L\bigl(C(t),\dot C(t)\bigr)+J(t)\cdot C(t)\bigr]\Bigr).
+\right.
+\tag{4.10}
+```
+
+In the sliced form (4.9) the source adds $`i\,\Delta t\sum_{k=0}^NJ(t_k)\cdot C(t_k)`$ to the exponent, so $`J`$ enters only through $`J(t_0),\ldots,J(t_N)`$. For $`t_i<t<t_f`$ define
+
+```math
+\left.
+\frac{\delta}{\delta J_a(t)}:=\lim_{N\to\infty}\frac{1}{\Delta t}\frac{\partial}{\partial J_a(t_k)},\qquad t_k\to t.
+\right.
+\tag{4.11}
+```
+
+Writing $`L_j:=L\bigl(C(t_j),[C(t_{j+1})-C(t_j)]/\Delta t\bigr)`$,
+
+```math
+\left.
+\begin{aligned}
+\frac{\delta}{\delta J_a(t)}K^J(Q_f,Q_i)
+&=\lim_{N\to\infty}\mathcal N_N\int\prod_{j=1}^Nd^nC(t_j)\,
+\frac{1}{\Delta t}\frac{\partial}{\partial J_a(t_k)}\exp\biggl[i\,\Delta t\sum_{j=0}^N\bigl(L_j+J(t_j)\cdot C(t_j)\bigr)\biggr]\\
+&=\lim_{N\to\infty}\mathcal N_N\int\prod_{j=1}^Nd^nC(t_j)\,
+iC_a(t_k)\exp\biggl[i\,\Delta t\sum_{j=0}^N\bigl(L_j+J(t_j)\cdot C(t_j)\bigr)\biggr]\\
+&=\int_{Q_i}^{Q_f}\mathcal DC\,iC_a(t)\exp\Bigl(i\int_{t_i}^{t_f}dt'\,\bigl[L\bigl(C(t'),\dot C(t')\bigr)+J(t')\cdot C(t')\bigr]\Bigr).
+\end{aligned}
+\right.
+\tag{4.12}
+```
+
+
+**Example: Free Particle in One Dimension**
+
+Take $`n=1`$, $`V=0`$ in (4.1):
+
+```math
+\left.
+L(x,y)=\frac12my^2,\qquad Q_i(t_i)=q_i,\qquad Q_f(t_f)=q_f.
+\right.
+\tag{4.13}
+```
+
+By (4.7)–(4.9), with $`C(t_0)=q_i`$, $`C(t_{N+1})=q_f`$ and $`\mathcal N_N=\bigl(\frac{m}{2\pi i\,\Delta t}\bigr)^{\frac{N+1}{2}}`$,
+
+```math
+\left.
+\begin{aligned}
+K(Q_f,Q_i)&=\int_{Q_i}^{Q_f}\mathcal DC\,e^{i\int_{t_i}^{t_f}dt\,\frac12m\dot C^2}\\
+&=\lim_{N\to\infty}\mathcal N_N\int\prod_{k=1}^{N}dC(t_k)\,e^{\frac{i}{\Delta t}\sum_{k=0}^{N}\frac12m\left(C(t_{k+1})-C(t_k)\right)^2}\\
+&=\lim_{N\to\infty}\mathcal N_N\int\prod_{k=1}^{N}dC(t_k)\,
+e^{\frac{i}{\Delta t}\left[\frac12mq_i^2+\frac12mq_f^2+mC^2(t_1)+\cdots+mC^2(t_N)\right]}\,
+e^{\frac{i}{\Delta t}(-m)\left[q_iC(t_1)+C(t_1)C(t_2)+\cdots+C(t_N)q_f\right]}.
+\end{aligned}
+\right.
+\tag{4.14}
+```
+
+Integrate $`C(t_1)`$, using $`\int_{-\infty}^{\infty}dx\,e^{iax^2}=\sqrt{\pi i/a}`$ for $`a>0`$ ($`a\to a+i\varepsilon`$, $`\varepsilon\to0^+`$):
+
+```math
+\left.
+\begin{aligned}
+\int dC(t_1)\,e^{\frac{i}{\Delta t}\left[mC^2(t_1)-mC(t_1)\left(q_i+C(t_2)\right)\right]}
+&=\int dC(t_1)\,e^{\frac{im}{\Delta t}\left(C(t_1)-\frac{q_i+C(t_2)}{2}\right)^2}\,e^{-\frac{im}{4\Delta t}\left(q_i+C(t_2)\right)^2}\\
+&=\sqrt{\frac{2\pi i\,\Delta t}{m}\cdot\frac12}\;e^{-\frac{im}{4\Delta t}\left(q_i+C(t_2)\right)^2}.
+\end{aligned}
+\right.
+\tag{4.15}
+```
+
+After $`C(t_1),\ldots,C(t_{j-1})`$, $`1\le j\le N`$:
+
+```math
+\left.
+K(Q_f,Q_i)=\lim_{N\to\infty}\mathcal N_N\Bigl(\frac{2\pi i\,\Delta t}{m}\Bigr)^{\frac{j-1}{2}}\frac{1}{\sqrt j}
+\int\prod_{k=j}^{N}dC(t_k)\,
+e^{\frac{im}{2\Delta t}\left[\frac{\left(C(t_j)-q_i\right)^2}{j}+C^2(t_j)+2C^2(t_{j+1})+\cdots+2C^2(t_N)+q_f^2\right]}\,
+e^{\frac{im}{2\Delta t}(-2)\left[C(t_j)C(t_{j+1})+\cdots+C(t_N)q_f\right]}.
+\right.
+\tag{4.16}
+```
+
+Integrate $`C(t_j)`$:
+
+```math
+\left.
+\begin{aligned}
+\frac{\left(C(t_j)-q_i\right)^2}{j}+C^2(t_j)-2C(t_j)C(t_{j+1})
+&=\frac{j+1}{j}\Bigl(C(t_j)-\frac{q_i+jC(t_{j+1})}{j+1}\Bigr)^2+\frac{\left(C(t_{j+1})-q_i\right)^2}{j+1}-C^2(t_{j+1}),\\
+\int dC(t_j)\,e^{\frac{im}{2\Delta t}\frac{j+1}{j}\left(C(t_j)-\frac{q_i+jC(t_{j+1})}{j+1}\right)^2}
+&=\sqrt{\frac{2\pi i\,\Delta t}{m}\cdot\frac{j}{j+1}},
+\end{aligned}
+\right.
+\tag{4.17}
+```
+
+which gives (4.16) with $`j+1`$; for $`j=N`$, $`C(t_{N+1})=q_f`$ and the bracket becomes $`\frac{(q_f-q_i)^2}{N+1}`$. Hence, with $`(N+1)\Delta t=t_f-t_i`$,
+
+```math
+\left.
+\begin{aligned}
+K(Q_f,Q_i)&=\lim_{N\to\infty}\Bigl(\frac{m}{2\pi i\,\Delta t}\Bigr)^{\frac{N+1}{2}}\Bigl(\frac{2\pi i\,\Delta t}{m}\Bigr)^{\frac N2}\frac{1}{\sqrt{N+1}}\,
+e^{\frac{im\left(q_f-q_i\right)^2}{2(N+1)\Delta t}}\\
+&=\boxed{\sqrt{\frac{m}{2\pi i\,(t_f-t_i)}}\;e^{\frac{im\left(q_f-q_i\right)^2}{2(t_f-t_i)}}.}
+\end{aligned}
+\right.
+\tag{4.18}
+```
+
+This example shows why the prefactor $`\mathcal N_N`$ is included in the definition (4.7) of the path integral. The result (4.18) is finite, while by its definition $`\mathcal N_N`$ diverges as $`N\to\infty`$; without the prefactor, the remaining factor $`\bigl(\frac{2\pi i\,\Delta t}{m}\bigr)^{\frac N2}\frac{1}{\sqrt{N+1}}`$ in (4.18) tends to zero, and so would $`K(Q_f,Q_i)`$.
+
+**Relation to Operator Quantization**
+
+Let $`\hat H:=\sum_{a=1}^n\hat p_a^2/(2m_a)+V(\hat q)`$ with $`[\hat q_a,\hat p_b]=i\delta_{ab}`$ and $`\hat q_a|q\rangle=q_a|q\rangle`$, and let $`\hat U(t_f,t_i)=e^{-i\hat H(t_f-t_i)}`$ be its evolution operator (2.21). Then, with $`q_i=Q_i(t_i)`$ and $`q_f=Q_f(t_f)`$,
+
+```math
+\left.
+\boxed{K(Q_f,Q_i)=\langle q_f|\hat U(t_f,t_i)|q_i\rangle=\langle q_f,t_f|q_i,t_i\rangle}
+\right.
+\tag{4.19}
+```
+
+in the Schrödinger and Heisenberg pictures respectively, where $`|q,t\rangle:=\hat U(t,0)^\dagger|q\rangle`$ satisfies $`\hat q_H(t)|q,t\rangle=q\,|q,t\rangle`$ by (2.22).
+
+<br><br>
+
+<a id="path-integrals-in-field-theory"></a>
+### 4.2 Path Integrals in Quantum Field Theory
+
+Following the second viewpoint in [Section 1.4](#classical-dynamics), $`t`$ is replaced by $`x^\mu`$.
+
+**Principle**
+
+- **Configuration space**: $`\mathrm{Conf}=\mathbb R^n`$.
+- **Dynamical structure**: the Lagrangian density
+
+```math
+\left.
+\begin{aligned}
+\mathcal L:\mathbb R^n\times(\mathbb R^n)^4&\to\mathbb R,\\
+(x,y^\mu)&\mapsto\sum_{a=1}^n\frac12y_a^\mu y_{a\mu}-V(x),
+\end{aligned}
+\right.
+\tag{4.20}
+```
+
+in which $`y^\mu\in\mathbb R^n`$, $`\mu=0,\ldots,3`$, and $`V:\mathbb R^n\to\mathbb R`$ is smooth.
+
+- **Paths**: for $`t_i<t_f`$,
+
+```math
+\left.
+\begin{aligned}
+\phi:[t_i,t_f]\times\mathbb R^3&\to\mathrm{Conf},\\
+x&\mapsto\phi(x),
+\end{aligned}
+\right.
+\tag{4.21}
+```
+
+with $`\phi(t):=\phi(t,\cdot\,)`$ the configuration at time $`t`$.
+
+- **Action**: the functional on paths
+
+```math
+\left.
+\begin{aligned}
+S:\{\text{paths}\}&\to\mathbb R,\\
+\phi&\mapsto S[\phi]:=\int_{\mathbb R^3}d^3x\int_{t_i}^{t_f}dt\,\mathcal L\bigl(\phi(x),\partial_\mu\phi(x)\bigr).
+\end{aligned}
+\right.
+\tag{4.22}
+```
+
+In the path integral the field takes the place of the path: a path (4.21) is a classical field (1.38) restricted to $`[t_i,t_f]\times\mathbb R^3`$. Paths are therefore denoted by $`\phi`$, and the integrals below are over field configurations.
+
+Below, $`\int d^4x:=\int_{t_i}^{t_f}dt\int_{\mathbb R^3}d^3x`$.
+
+**Quantization**
+
+- **Initial configuration**:
+
+```math
+\left.
+\begin{aligned}
+\Phi_i:\{t_i\}\times\mathbb R^3&\to\mathrm{Conf},\\
+(t_i,\mathbf x)&\mapsto\Phi_i(t_i,\mathbf x).
+\end{aligned}
+\right.
+\tag{4.23}
+```
+
+- **Final configuration**:
+
+```math
+\left.
+\begin{aligned}
+\Phi_f:\{t_f\}\times\mathbb R^3&\to\mathrm{Conf},\\
+(t_f,\mathbf x)&\mapsto\Phi_f(t_f,\mathbf x).
+\end{aligned}
+\right.
+\tag{4.24}
+```
+
+- **Transition kernel**:
+
+```math
+\left.
+\boxed{K(\Phi_f,\Phi_i):=\int_{\phi(t_i,\mathbf x)=\Phi_i(t_i,\mathbf x)}^{\phi(t_f,\mathbf x)=\Phi_f(t_f,\mathbf x)}\mathcal D\phi\,e^{iS[\phi]},}
+\right.
+\tag{4.25}
+```
+
+also written $`\int_{\Phi_i}^{\Phi_f}\mathcal D\phi\,e^{iS[\phi]}`$; the boundary conditions hold for every $`\mathbf x\in\mathbb R^3`$.
+
+**Correlation Functions**
+
+As in (4.19),
+
+```math
+\left.
+K(\Phi_f,\Phi_i)=\langle\Phi_f|\hat U(t_f,t_i)|\Phi_i\rangle,
+\right.
+\tag{4.26}
+```
+ In operator quantization the vacuum expands in this basis, which defines the vacuum functional $`\Psi[\Phi]`$:
+
+```math
+\left.
+|\mathrm{vac}\rangle=\int\mathcal D\Phi\,|\Phi\rangle\langle\Phi|\mathrm{vac}\rangle=\int\mathcal D\Phi\,|\Phi\rangle\,\Psi[\Phi],\qquad
+\Psi[\Phi]:=\langle\Phi|\mathrm{vac}\rangle.
+\right.
+\tag{4.27}
+```
+
+Hence
+
+```math
+\left.
+\begin{aligned}
+K(\mathrm{vac}_f,\mathrm{vac}_i)&:=\langle\mathrm{vac}_f|\hat U(t_f,t_i)|\mathrm{vac}_i\rangle\\
+&=\int\mathcal D\Phi_f\,\mathcal D\Phi_i\,\Psi^*[\Phi_f]\,\Psi[\Phi_i]\,K(\Phi_f,\Phi_i).
+\end{aligned}
+\right.
+\tag{4.28}
+```
+
+
+
+
+- **Correlation function**: 
+
+```math
+\left.
+\boxed{
+\begin{aligned}
+G_{a_1\cdots a_r}(x_1,\ldots,x_r)&:=\langle \phi_{a_1}(x_1)\cdots\phi_{a_r}(x_r)\rangle_{\mathrm{vac}}\\
+&=\frac{\int_{\mathrm{vac}}^{\mathrm{vac}}\mathcal D\phi\,\phi_{a_1}(x_1)\cdots\phi_{a_r}(x_r)\,e^{iS[\phi]}}{\int_{\mathrm{vac}}^{\mathrm{vac}}\mathcal D\phi\,e^{iS[\phi]}},
+\end{aligned}}
+\right.
+\tag{4.34}
+```
+
+with $`t_i<x_k^0<t_f`$. 
+
+上述定义中的分母源自于对真空归一化的要求，在上述定义下，<1>=真空的模=1
+
+- **Generating functional**: for a source $`J:[t_i,t_f]\times\mathbb R^3\to\mathbb R^n`$, with $`J\cdot\phi`$ as in (4.10),
+
+```math
+\left.
+K^J(\Phi_f,\Phi_i):=\int_{\Phi_i}^{\Phi_f}\mathcal D\phi\,\exp\Bigl(iS[\phi]+i\int d^4x\,J(x)\cdot\phi(x)\Bigr),
+\right.
+\tag{4.29}
+```
+
+and, with the vacuum endpoints as in (4.28),
+
+```math
+\left.
+\boxed{
+Z[J]:=K^J(\mathrm{vac}_f,\mathrm{vac}_i)
+=\int\mathcal D\Phi_f\,\mathcal D\Phi_i\,\Psi^*[\Phi_f]\,\Psi[\Phi_i]\,K^J(\Phi_f,\Phi_i),}
+\right.
+\tag{4.30}
+```
+
+so that $`Z[0]=K(\mathrm{vac}_f,\mathrm{vac}_i)`$.
+
+As in (4.12), each $`\delta/\delta J_a(x)`$ acting on (4.29) brings down $`i\phi_a(x)`$, so by (4.30) and (4.33)
+
+```math
+\left.
+\boxed{G_{a_1\cdots a_r}(x_1,\ldots,x_r)=\frac{1}{Z[0]}\left.\Bigl(-i\frac{\delta}{\delta J_{a_1}(x_1)}\Bigr)\cdots\Bigl(-i\frac{\delta}{\delta J_{a_r}(x_r)}\Bigr)Z[J]\right|_{J=0}.}
+\right.
+\tag{4.35}
+```
+
+**Connected Functions**
+
+For a single real scalar field,
+
+```math
+\left.
+\begin{aligned}
+G_n(x_1,\ldots,x_n)&:=\langle\Omega|\mathcal T[\hat\phi_H(x_1)\cdots\hat\phi_H(x_n)]|\Omega\rangle
+=\left.\frac{1}{Z[0]}\frac{1}{i^n}\frac{\delta^n Z[J]}{\delta J(x_1)\cdots\delta J(x_n)}\right|_{J=0},\\
+W[J]&:=-i\ln Z[J],\qquad
+G_{n,\mathrm c}=\left.\frac{1}{i^{n-1}}\frac{\delta^nW}{\delta J(x_1)\cdots\delta J(x_n)}\right|_{J=0}.
+\end{aligned}
+\right.
+\tag{4.36}
+```
+
+Here $`|\Omega\rangle`$ is the normalized interacting vacuum and $`J(x)`$ is a commuting external source. Functional integrals require a regulator; the expressions below define their perturbative use.
+
+**Effective Action and Schwinger--Dyson Equation**
+
+The Legendre transform generates one-particle-irreducible (1PI) vertices, where a 1PI graph stays connected after cutting any single internal line:
+
+```math
+\left.
+\phi_c(x):=\frac{\delta W}{\delta J(x)},\qquad
+\Gamma[\phi_c]:=W[J]-\int d^4x\,J\phi_c,\qquad
+\boxed{\frac{\delta\Gamma}{\delta\phi_c(x)}=-J(x).}
+\right.
+\tag{4.37}
+```
+
+For a translation-invariant scalar functional measure, with functional boundary terms absent,
+
+```math
+\left.
+\left[
+\left.\frac{\delta S}{\delta\phi(x)}\right|_{\phi\,\to\,(1/i)\delta/\delta J}
++J(x)\right]Z[J]=0.
+\right.
+\tag{4.38}
+```
+
+**Euclidean Continuation and Fermions**
+
+When the time contour can be rotated without crossing singularities, $`t=-i\tau`$ gives, for $`\mathcal L=\tfrac12\partial_\mu\phi\partial^\mu\phi-V(\phi)`$,
+
+```math
+\left.
+e^{iS}\longrightarrow e^{-S_E},\qquad
+S_E=\int d\tau\,d^3x\left[\frac12(\partial_\tau\phi)^2
++\frac12(\boldsymbol\nabla\phi)^2+V(\phi)\right].
+\right.
+\tag{4.39}
+```
+
+Fermionic fields in the functional integral are independent Grassmann variables. With a fixed measure ordering, a quadratic Dirac action gives
+
+```math
+\left.
+\int\mathcal D\bar\psi\,\mathcal D\psi\,
+e^{i\int d^4x\,\bar\psi(i\gamma^\mu\partial_\mu-m)\psi}\ \propto\ \det(i\gamma^\mu\partial_\mu-m),
+\right.
+\tag{4.40}
+```
+
+where the field-independent normalization is absorbed into $`Z[0]`$ and the inverse of $`i\gamma^\mu\partial_\mu-m`$ uses the Feynman prescription.
+
+**Gauge Fixing and Faddeev--Popov Ghosts**
+
+For perturbative $`SU(3)`$ theory near the trivial gauge configuration, Lorenz gauge introduces the gauge parameter $`\xi`$ and anticommuting scalar ghost fields $`c^a,\bar c^a`$:
+
+```math
+\left.
+\begin{aligned}
+\mathcal L_{\mathrm{gf}}&=-\frac{1}{2\xi}(\partial^\mu A^a_\mu)^2,\\
+\mathcal L_{\mathrm{gh}}&=-\bar c^a\partial^\mu(D_\mu^{ab}c^b),\qquad
+D_\mu^{ab}:=\delta^{ab}\partial_\mu+g_s f^{acb}A^c_\mu,\\
+\Delta_{\mathrm{FP}}[A]&=\det[-\partial^\mu D_\mu^{ab}].
+\end{aligned}
+\right.
+\tag{4.41}
+```
+
+For an Abelian gauge field in this linear gauge, the determinant is field independent and the ghosts decouple. This local perturbative construction does not resolve global gauge-copy ambiguities.
+
+<br><br>
+
+<a id="phi-cubed-theory"></a>
+### 4.3 $`\phi^3`$ Theory
+
+**Action**
+
+Take $`n=1`$, $`\mathrm{Conf}=\mathbb R`$ and $`V(\phi)=\frac12m^2\phi^2+\frac1{3!}\lambda\phi^3`$ in (4.20). With $`\Box:=\partial_\mu\partial^\mu`$ as in (1.91),
+
+```math
+\left.
+\begin{aligned}
+S[\phi]&=\int d^4x\,\mathcal L\bigl(\phi(x),\partial_\mu\phi(x)\bigr)\\
+&=\int d^4x\,\Bigl[\frac12\partial_\mu\phi\,\partial^\mu\phi-\frac12m^2\phi^2-\frac1{3!}\lambda\phi^3\Bigr]\\
+&=\int d^4x\,\Bigl[-\frac12\phi(\Box+m^2)\phi-\frac1{3!}\lambda\phi^3\Bigr]
++\frac12\int d^3x\,\bigl[\phi\,\partial_0\phi\bigr]_{x^0=t_i}^{x^0=t_f}.
+\end{aligned}
+\right.
+\tag{4.42}
+```
+
+$`S_0[\phi]`$ denotes (4.42) at $`\lambda=0`$.
+
+**Feynman Propagator**
+
+```math
+\left.
+\begin{aligned}
+(\Box+m^2)\Delta_F(x)&=-i\delta^{(4)}(x),\\
+\Delta_F(x)&=\int\frac{d^4p}{(2\pi)^4}\,\frac{-i}{-p^2+m^2-i\varepsilon}\,e^{-ip\cdot x}
+=\int\frac{d^4p}{(2\pi)^4}\,\frac{i}{p^2-m^2+i\varepsilon}\,e^{-ip\cdot x},
+\end{aligned}
+\right.
+\tag{4.43}
+```
+
+with $`\varepsilon\to0^+`$; this is the function (6.12).
+
+**Free Generating Functional**
+
+From here on $`\mathrm{vac}`$ is the vacuum of $`S_0`$, and $`J`$ vanishes near $`x^0=t_i`$ and $`x^0=t_f`$. Let
+
+```math
+\left.
+K_0^J(\Phi_f,\Phi_i):=\int_{\Phi_i}^{\Phi_f}\mathcal D\phi\,\exp\Bigl(iS_0[\phi]+i\int d^4x\,J(x)\phi(x)\Bigr),
+\qquad K_0:=K_0^J\big|_{J=0}.
+\right.
+\tag{4.44}
+```
+
+In $`K_0^J(\mathrm{vac}_f,\mathrm{vac}_i)`$ shift the paths, together with $`\Phi_f`$ and $`\Phi_i`$, by
+
+```math
+\left.
+\phi(x)\to\phi(x)+i\int d^4y\,\Delta_F(x-y)J(y),
+\right.
+\tag{4.45}
+```
+
+which leaves the measures in (4.28) unchanged. By (4.43), the integrand of $`\int d^4x`$ in the exponent becomes
+
+```math
+\left.
+\begin{aligned}
+&-\frac12\phi(\Box+m^2)\phi+J\phi\\
+&\to-\frac12\phi(\Box+m^2)\phi+J\phi
+\underbrace{-\frac i2\int d^4y\,\Delta_F(x-y)J(y)\,(\Box+m^2)\phi(x)}_{-\frac12J\phi}\\
+&\qquad+J(x)\,i\int d^4y\,\Delta_F(x-y)J(y)
+\underbrace{-\frac12\phi(x)\,i\int d^4y\,\bigl(-i\delta^{(4)}(x-y)\bigr)J(y)}_{-\frac12J\phi}\\
+&\qquad\underbrace{+\frac12\int d^4y\,\Delta_F(x-y)J(y)\,(\Box+m^2)\int d^4\bar y\,\Delta_F(x-\bar y)J(\bar y)}_{-\frac i2J\Delta_FJ}\\
+&\to-\frac12\phi(\Box+m^2)\phi+\frac i2\int d^4y\,J(y)\Delta_F(x-y)J(x),
+\end{aligned}
+\right.
+\tag{4.46}
+```
+
+where the first underbrace holds after integrating by parts in $`x`$, up to terms at $`x^0=t_i,t_f`$. Write $`\chi(x):=i\int d^4y\,\Delta_F(x-y)J(y)`$ for the shift (4.45), so that $`(\Box+m^2)\chi=J`$ by (4.43). Including the terms at $`x^0=t_i,t_f`$ from (4.42) and from this integration by parts, the exponent of (4.44) after the shift is exactly
+
+```math
+\left.
+\begin{aligned}
+iS_0[\phi+\chi]+i\int d^4x\,J(\phi+\chi)
+&=iS_0[\phi]-\frac12\int d^4x\,d^4y\,J(x)\Delta_F(x-y)J(y)\\
+&\quad+i\int d^3x\,\Bigl[\bigl(\phi+\tfrac12\chi\bigr)\partial_0\chi\Bigr]_{x^0=t_i}^{x^0=t_f}.
+\end{aligned}
+\right.
+\tag{4.47}
+```
+
+Closing the $`p^0`$ contour of (4.43) in the lower half-plane for $`x^0>0`$ and in the upper half-plane for $`x^0<0`$, around the poles $`p^0=\pm(E_{\mathbf p}-i\varepsilon')`$ with $`E_{\mathbf p}`$ as in (2.7) and $`\varepsilon'\to0^+`$,
+
+```math
+\left.
+\Delta_F(x)=\int\frac{d^3p}{(2\pi)^3\,2E_{\mathbf p}}\,e^{i\mathbf p\cdot\mathbf x-iE_{\mathbf p}|x^0|}.
+\right.
+\tag{4.48}
+```
+
+Let $`\mathcal E:=(-\nabla^2+m^2)^{1/2}`$, i.e. $`\mathcal E\,e^{i\mathbf p\cdot\mathbf x}=E_{\mathbf p}\,e^{i\mathbf p\cdot\mathbf x}`$. Since $`J`$ vanishes near $`t_i`$ and $`t_f`$, (4.48) gives
+
+```math
+\left.
+\partial_0\chi\big|_{x^0=t_f}=-i\mathcal E\chi\big|_{x^0=t_f},\qquad
+\partial_0\chi\big|_{x^0=t_i}=+i\mathcal E\chi\big|_{x^0=t_i},
+\right.
+\tag{4.49}
+```
+
+so $`\chi`$ has only positive frequencies at $`t_f`$ and only negative frequencies at $`t_i`$.
+
+For $`S_0`$ the vacuum is $`|0\rangle`$ of (2.8). At $`t=0`$ the Schrödinger-picture operators are $`\hat\phi(\mathbf x)=\hat\phi_I(0,\mathbf x)`$ and $`\hat\pi(\mathbf x)=\partial_0\hat\phi_I(0,\mathbf x)`$ by (6.2) and (1.86). Inverting (2.7), and acting with $`\hat\pi(\mathbf x)`$ as $`-i\,\delta/\delta\Phi(\mathbf x)`$ on $`\Psi[\Phi]=\langle\Phi|0\rangle`$,
+
+```math
+\left.
+\begin{aligned}
+\hat a_{\mathbf p}&=\int d^3x\,e^{-i\mathbf p\cdot\mathbf x}\bigl[E_{\mathbf p}\hat\phi(\mathbf x)+i\hat\pi(\mathbf x)\bigr],\\
+0=\langle\Phi|\hat a_{\mathbf p}|0\rangle&=\int d^3x\,e^{-i\mathbf p\cdot\mathbf x}\Bigl[(\mathcal E\Phi)(\mathbf x)+\frac{\delta}{\delta\Phi(\mathbf x)}\Bigr]\Psi[\Phi]\quad\text{for all }\mathbf p,\\
+\Psi[\Phi]&=\Psi[0]\exp\Bigl(-\frac12\int d^3x\,\Phi\,\mathcal E\,\Phi\Bigr),
+\end{aligned}
+\right.
+\tag{4.50}
+```
+
+where the second line uses $`\int d^3x\,f\,\mathcal E\,g=\int d^3x\,(\mathcal Ef)\,g`$ and states $`\delta\Psi/\delta\Phi(\mathbf x)=-(\mathcal E\Phi)(\mathbf x)\Psi[\Phi]`$. With $`\chi_{f,i}:=\chi(t_{f,i},\cdot\,)`$, the shift turns $`\Psi^*[\Phi_f]\Psi[\Phi_i]`$ into $`\Psi^*[\Phi_f+\chi_f]\Psi[\Phi_i+\chi_i]`$, while $`\phi(t_{f,i},\cdot\,)=\Phi_{f,i}`$. By (4.49) and (4.50),
+
+```math
+\left.
+\begin{aligned}
+i\int d^3x\,\Bigl[\bigl(\phi+\tfrac12\chi\bigr)\partial_0\chi\Bigr]_{x^0=t_i}^{x^0=t_f}
+&=\int d^3x\,\Bigl[\bigl(\Phi_f+\tfrac12\chi_f\bigr)\mathcal E\chi_f+\bigl(\Phi_i+\tfrac12\chi_i\bigr)\mathcal E\chi_i\Bigr],\\
+\ln\frac{\Psi^*[\Phi_f+\chi_f]\,\Psi[\Phi_i+\chi_i]}{\Psi^*[\Phi_f]\,\Psi[\Phi_i]}
+&=-\int d^3x\,\Bigl[\bigl(\Phi_f+\tfrac12\chi_f\bigr)\mathcal E\chi_f+\bigl(\Phi_i+\tfrac12\chi_i\bigr)\mathcal E\chi_i\Bigr],
+\end{aligned}
+\right.
+\tag{4.51}
+```
+
+so the terms at $`x^0=t_i,t_f`$ in (4.47) cancel the change of $`\Psi^*[\Phi_f]\Psi[\Phi_i]`$. Hence
+
+```math
+\left.
+K_0^J(\mathrm{vac}_f,\mathrm{vac}_i)=K_0(\mathrm{vac}_f,\mathrm{vac}_i)\,
+\exp\Bigl[-\frac12\int d^4x\,d^4y\,J(x)\Delta_F(x-y)J(y)\Bigr],
+\right.
+\tag{4.52}
+```
+
+and
+
+```math
+\left.
+\boxed{
+\begin{aligned}
+Z_0[J]&:=K_0^J(\mathrm{vac}_f,\mathrm{vac}_i)
+=\int\mathcal D\Phi_f\,\mathcal D\Phi_i\,\Psi^*[\Phi_f]\,\Psi[\Phi_i]\,K_0^J(\Phi_f,\Phi_i)\\
+&=Z_0[0]\,\exp\Bigl[-\frac12\int d^4x\,d^4y\,J(x)\Delta_F(x-y)J(y)\Bigr],
+\end{aligned}}
+\right.
+\tag{4.53}
+```
+
+with $`Z_0[0]=K_0(\mathrm{vac}_f,\mathrm{vac}_i)`$ by (4.52).
+
+**Two-Point Function**
+
+For $`S_0`$ and $`t_i<z_1^0,z_2^0<t_f`$, by (4.35) and (4.53),
+
+```math
+\left.
+\boxed{
+\begin{aligned}
+\langle\phi(z_1)\phi(z_2)\rangle_{\mathrm{vac}}
+&=\frac{1}{Z_0[0]}\Bigl(-i\frac{\delta}{\delta J(z_1)}\Bigr)\Bigl(-i\frac{\delta}{\delta J(z_2)}\Bigr)Z_0[J]\Big|_{J=0}\\
+&=\Bigl(-i\frac{\delta}{\delta J(z_1)}\Bigr)\Bigl(-i\frac{\delta}{\delta J(z_2)}\Bigr)
+\exp\Bigl[-\frac12\int d^4x\,d^4y\,J(x)\Delta_F(x-y)J(y)\Bigr]\Big|_{J=0}\\
+&=\frac12\Delta_F(z_1-z_2)+\frac12\Delta_F(z_2-z_1)\\
+&=\Delta_F(z_1-z_2).
+\end{aligned}}
+\right.
+\tag{4.54}
+```
+
+**Perturbation Expansion**
+
+By (4.12), each $`-i\,\delta/\delta J(z)`$ acting on (4.44) inserts $`\phi(z)`$, so
+
+```math
+\left.
+\begin{aligned}
+K(\Phi_f,\Phi_i)
+&=\int_{\Phi_i}^{\Phi_f}\mathcal D\phi\,\exp\Bigl(iS_0[\phi]+i\int d^4z\,\Bigl(-\frac{\lambda}{3!}\Bigr)\phi^3\Bigr)\\
+&=\int_{\Phi_i}^{\Phi_f}\mathcal D\phi\,e^{iS_0[\phi]}\sum_{m=0}^\infty\frac1{m!}\Bigl(i\int d^4z\,\Bigl(-\frac{\lambda}{3!}\Bigr)\phi(z)^3\Bigr)^m\\
+&=\sum_{m=0}^\infty\frac1{m!}\Bigl(-\frac{i\lambda}{3!}\Bigr)^m\prod_{k=1}^m\int d^4z_k\Bigl(-i\frac{\delta}{\delta J(z_k)}\Bigr)^3K_0^J(\Phi_f,\Phi_i)\Big|_{J=0}\\
+&=\sum_{m=0}^\infty\frac1{m!}\Bigl(\frac{\lambda}{3!}\Bigr)^m\prod_{k=1}^m\int d^4z_k\Bigl(\frac{\delta}{\delta J(z_k)}\Bigr)^3K_0^J(\Phi_f,\Phi_i)\Big|_{J=0}.
+\end{aligned}
+\right.
+\tag{4.55}
+```
+
+With the vacuum of $`S_0`$ at both ends, (4.52) gives
+
+```math
+\left.
+\boxed{
+\begin{aligned}
+K(\mathrm{vac}_f,\mathrm{vac}_i)
+&=\sum_{m=0}^\infty\frac1{m!}\Bigl(\frac{\lambda}{3!}\Bigr)^m\prod_{k=1}^m\int d^4z_k\Bigl(\frac{\delta}{\delta J(z_k)}\Bigr)^3\\
+&\qquad\exp\Bigl[-\frac12\int d^4x\,d^4y\,J(x)\Delta_F(x-y)J(y)\Bigr]\Big|_{J=0}\cdot K_0(\mathrm{vac}_f,\mathrm{vac}_i).
+\end{aligned}}
+\right.
+\tag{4.56}
+```
 
 <br><br>
 
@@ -5497,7 +6375,7 @@ Here $`Z_1`$ and $`Z_2`$ are the vertex and fermion-field renormalization consta
 
 **Gauge-Fixed Lagrangian**
 
-With the covariant gauge fixing of (6.15), the QED Lagrangian (4.26) for Dirac fields $`\psi_f`$ of charge $`Q_fe`$ and mass $`m_f`$ is
+With the covariant gauge fixing of (6.15), the QED Lagrangian (3.26) for Dirac fields $`\psi_f`$ of charge $`Q_fe`$ and mass $`m_f`$ is
 
 ```math
 \left.
@@ -5510,7 +6388,7 @@ With the covariant gauge fixing of (6.15), the QED Lagrangian (4.26) for Dirac f
 \tag{7.9}
 ```
 
-The Faddeev--Popov ghosts decouple, as noted after (3.8).
+The Faddeev--Popov ghosts decouple, as noted after (4.41).
 
 
 **Feynman Rules**
@@ -6140,4 +7018,9 @@ I_{\nu_1\cdots\nu_N}=\sum_r c_r(d,\{p\cdot p\},\{m^2\})M_r,
 ```
 
 Boundary values and the Feynman analytic continuation are required to solve these equations. Ultraviolet and infrared poles must be distinguished before subtraction; a scaleless integral vanishes in dimensional regularization but may conceal a cancellation between ultraviolet and infrared poles. Higher-loop chiral calculations also require an explicit $`d`$-dimensional $`\gamma^5`$ prescription; the four-dimensional Weyl matrices alone do not supply one.
+
+<br><br>
+
+<a id="qft-ch9"></a>
+## 9. Cosmology
 
