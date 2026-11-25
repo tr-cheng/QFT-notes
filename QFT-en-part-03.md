@@ -1575,42 +1575,213 @@ M^2=\frac{v_{\mathrm{SM}}^2}4\begin{pmatrix}g_2^2&0&0&0\\0&g_2^2&0&0\\0&0&g_2^2&
 <a id="field-redefinitions-and-flavor"></a>
 #### Yukawa Coupling and Flavor
 
-在标准模型中，费米子获得质量要通过yukawa coupling。
-标准模型中的全部Yukawa 耦合为：
+Besides the gauge interactions in the covariant derivative (5.48), the Lagrangian density contains the Yukawa terms, whose couplings $`Y_l,Y_d,Y_u`$ are complex $`3\times3`$ matrices carrying only the generation indices:
 
 ```math
 \left.
 \begin{aligned}
 \mathcal L\supset{}&-\overline{(\ell_L)_\alpha}(Y_l)_{\alpha\beta}H(E_R)_\beta-\overline{(E_R)_\beta}(Y_l)^*_{\alpha\beta}H^\dagger(\ell_L)_\alpha\\
 &-\overline{(Q_L)_\alpha}(Y_d)_{\alpha\beta}H(d_R)_\beta-\overline{(d_R)_\beta}(Y_d)^*_{\alpha\beta}H^\dagger(Q_L)_\alpha\\
-&-\overline{(Q_L)_\alpha}(Y_u)_{\alpha\beta}H^c(u_R)_\beta-\overline{(u_R)_\beta}(Y_u)^*_{\alpha\beta}(H^c)^\dagger(Q_L)_\alpha,\\
-H^c:={}&\epsilon H^*,\qquad\epsilon\,(T_L^a)^*\epsilon^\dagger=-T_L^a .
+&-\overline{(Q_L)_\alpha}(Y_u)_{\alpha\beta}H^c(u_R)_\beta-\overline{(u_R)_\beta}(Y_u)^*_{\alpha\beta}(H^c)^\dagger(Q_L)_\alpha,\\[6pt]
+H^c:={}&i\sigma^2H^*=\begin{pmatrix}0&1\\-1&0\end{pmatrix}\begin{pmatrix}H_1^*\\H_2^*\end{pmatrix}=\begin{pmatrix}H_2^*\\-H_1^*\end{pmatrix},
+\end{aligned}
+\right.
+\tag{5.51}
+```
+
+where $`H=(H_1,H_2)^T`$ in the index $`i`$ and the repeated $`\alpha,\beta`$ are summed.
+
+Each Yukawa term in (5.51) is invariant under the $`SU(3)_c\times SU(2)_L\times U(1)_Y`$ gauge transformations.
+
+For example, consider the term $`-\overline{(Q_L)_\alpha}(Y_u)_{\alpha\beta}H^c(u_R)_\beta`$. A gauge transformation acts on each field $`\psi`$ of (5.47) as $`\psi\to e^{i\theta_c^aT_c^a+i\theta_L^aT_L^a+i\theta_YY}\psi`$ with real $`\theta_c^a(x)`$, $`\theta_L^a(x)`$, $`\theta_Y(x)`$. 
+
+With $`U_c:=e^{i\theta_c^a\lambda^a/2}`$ and $`U_L:=e^{i\theta_L^a\sigma^a/2}`$,
+
+```math
+\left.
+\begin{aligned}
+(Q_L)_\alpha&\to e^{\frac i6\theta_Y}(U_L\otimes U_c)(Q_L)_\alpha,\\
+(u_R)_\beta&\to e^{\frac{2i}3\theta_Y}U_c(u_R)_\beta,\\
+H&\to e^{\frac i2\theta_Y}U_LH,\\
+H^c&\to i\sigma^2\bigl(e^{\frac i2\theta_Y}U_LH\bigr)^*=e^{-\frac i2\theta_Y}\bigl[i\sigma^2U_L^*(i\sigma^2)^\dagger\bigr]i\sigma^2H^*=e^{-\frac i2\theta_Y}U_LH^c,\\
+\overline{(Q_L)_\alpha}H^c(u_R)_\beta&\to e^{i(-\frac16-\frac12+\frac23)\theta_Y}\,\overline{(Q_L)_\alpha}(U_L\otimes U_c)^\dagger(U_L\otimes U_c)H^c(u_R)_\beta=\overline{(Q_L)_\alpha}H^c(u_R)_\beta,
 \end{aligned}
 \right.
 \tag{5.52}
 ```
 
-两式中重复的代指标 $`\alpha,\beta`$ 求和，$`\epsilon`$ 为幺正矩阵。
+where $`i\sigma^2U_L^*(i\sigma^2)^\dagger=U_L`$ because $`i\sigma^2(\sigma^a)^*(i\sigma^2)^\dagger=-\sigma^a`$ by (5.46).
 
-取成直积形式并没有消除全部冗余：与 $`\psi`$ 上全部生成元对易的 $`S`$ 不改变生成元。生成元在代指标上是 $`I_\alpha`$，在其余内部指标上不可约，由 Schur 引理，这样的 $`S`$ 只作用于代指标，$`S=V_\psi\in U(3)`$：
+With the generation indices written explicitly, the Lagrangian density of the Standard Model contains the fermion kinetic terms, with the covariant derivative (5.48) and the generators (5.47), and the Yukawa terms (5.51):
 
 ```math
 \left.
-(\psi)_\alpha\to(V_\psi)_{\alpha\beta}(\psi)_\beta,\qquad\psi=\ell_L,E_R,Q_L,u_R,d_R .
+\begin{aligned}
+\mathcal L\supset{}&\overline{(\ell_L)_\alpha}\,i\gamma^\mu\Bigl(\partial_\mu-ig_2W_\mu^a\frac{\sigma^a}2+\frac i2g_1B_\mu\Bigr)(\ell_L)_\alpha\\
+&+\overline{(E_R)_\alpha}\,i\gamma^\mu\bigl(\partial_\mu+ig_1B_\mu\bigr)(E_R)_\alpha\\
+&+\overline{(Q_L)_\alpha}\,i\gamma^\mu\Bigl(\partial_\mu-ig_sA_\mu^a\frac{\lambda^a}2-ig_2W_\mu^a\frac{\sigma^a}2-\frac i6g_1B_\mu\Bigr)(Q_L)_\alpha\\
+&+\overline{(u_R)_\alpha}\,i\gamma^\mu\Bigl(\partial_\mu-ig_sA_\mu^a\frac{\lambda^a}2-\frac{2i}3g_1B_\mu\Bigr)(u_R)_\alpha\\
+&+\overline{(d_R)_\alpha}\,i\gamma^\mu\Bigl(\partial_\mu-ig_sA_\mu^a\frac{\lambda^a}2+\frac i3g_1B_\mu\Bigr)(d_R)_\alpha\\[6pt]
+&-\overline{(\ell_L)_\alpha}(Y_l)_{\alpha\beta}H(E_R)_\beta-\overline{(E_R)_\beta}(Y_l)^*_{\alpha\beta}H^\dagger(\ell_L)_\alpha\\
+&-\overline{(Q_L)_\alpha}(Y_d)_{\alpha\beta}H(d_R)_\beta-\overline{(d_R)_\beta}(Y_d)^*_{\alpha\beta}H^\dagger(Q_L)_\alpha\\
+&-\overline{(Q_L)_\alpha}(Y_u)_{\alpha\beta}H^c(u_R)_\beta-\overline{(u_R)_\beta}(Y_u)^*_{\alpha\beta}(H^c)^\dagger(Q_L)_\alpha,
+\end{aligned}
 \right.
 \tag{5.53}
 ```
 
-(5.51) 与动能项不变，(5.52) 形式不变，Yukawa 矩阵变为
+where $`\sigma^a/2`$ acts on the index $`i`$, $`\lambda^a/2`$ on the index $`c`$, and the repeated $`\alpha,\beta`$ are summed.
+
+
+
+
+
+
+
+
+
+
+
+- **Generation transformation**: with a constant $`S_\psi\in U(3)`$ for each field, acting only on the generation index,
 
 ```math
 \left.
-Y_l\to V_{\ell_L}^\dagger Y_lV_{E_R},\qquad Y_d\to V_{Q_L}^\dagger Y_dV_{d_R},\qquad Y_u\to V_{Q_L}^\dagger Y_uV_{u_R} .
+(\psi)_\alpha\to(S_\psi)_{\alpha\beta}(\psi)_\beta,\qquad\psi=\ell_L,E_R,Q_L,u_R,d_R .
 \right.
 \tag{5.54}
 ```
 
-消除这一冗余的办法是对角化 Yukawa 矩阵。由奇异值分解，取 $`V_{\ell_L},V_{E_R}`$ 使 $`Y_l`$ 为非负对角矩阵；取 $`V_{Q_L},V_{u_R}`$ 使 $`Y_u`$ 为非负对角矩阵，再取 $`V_{d_R}`$ 使 $`Y_d`$ 为幺正矩阵 $`V_{\mathrm{CKM}}`$ 与非负对角矩阵的乘积。
+Inserting $`S_\psi S_\psi^\dagger=I_\alpha`$ into the kinetic and Yukawa terms of (5.53),
+
+```math
+\left.
+\begin{aligned}
+\overline{(\psi)_\alpha}\,i\gamma^\mu D_\mu(\psi)_\alpha
+&=\overline{(\psi)_\alpha}(S_\psi S_\psi^\dagger)_{\alpha\beta}\,i\gamma^\mu D_\mu(\psi)_\beta
+=\overline{(S_\psi^\dagger\psi)_\alpha}\,i\gamma^\mu D_\mu(S_\psi^\dagger\psi)_\alpha,\\
+\overline{(\ell_L)_\alpha}(Y_l)_{\alpha\beta}H(E_R)_\beta
+&=\overline{(\ell_L)_\alpha}(S_{\ell_L}S_{\ell_L}^\dagger Y_lS_{E_R}S_{E_R}^\dagger)_{\alpha\beta}H(E_R)_\beta\\
+&=\overline{(S_{\ell_L}^\dagger\ell_L)_\alpha}(S_{\ell_L}^\dagger Y_lS_{E_R})_{\alpha\beta}H(S_{E_R}^\dagger E_R)_\beta,
+\end{aligned}
+\right.
+\tag{5.55}
+```
+
+and likewise for the other terms of (5.51), where $`S_\psi^\dagger`$ commutes with $`i\gamma^\mu D_\mu`$ because $`S_\psi`$ is constant and acts only on the generation index. Replacing the fields by $`S_\psi\psi`$ as in (5.54) turns each $`S_\psi^\dagger\psi`$ into $`\psi`$, so the kinetic terms are unchanged and (5.51) keeps its form with the Yukawa matrices replaced by
+
+```math
+\left.
+Y_l\to S_{\ell_L}^\dagger Y_lS_{E_R},\qquad Y_d\to S_{Q_L}^\dagger Y_dS_{d_R},\qquad Y_u\to S_{Q_L}^\dagger Y_uS_{u_R} .
+\right.
+\tag{5.56}
+```
+
+Since (5.54) only changes the field variables, Yukawa matrices related by (5.56) describe the same physics. The parametrization of the Yukawa interactions by $`Y_l,Y_d,Y_u`$ is therefore redundant: the number of physical parameters is smaller than the number of real parameters in $`Y_l,Y_d,Y_u`$.
+
+**Parametrization of the Yukawa Couplings: Singular Value Decomposition**
+
+<div style="margin-left: 2em;">
+
+$`\circ`$ Leptons
+
+By the singular value decomposition, the complex $`3\times3`$ matrix $`Y_l`$ can be written as
+
+```math
+\left.
+Y_l=S_1\begin{pmatrix}y_1&0&0\\0&y_2&0\\0&0&y_3\end{pmatrix}S_2^\dagger,\qquad S_1,S_2\in U(3),\qquad 0\le y_1\le y_2\le y_3,
+\right.
+\tag{5.57}
+```
+
+where $`y_1^2,y_2^2,y_3^2`$ are the eigenvalues of $`Y_l^\dagger Y_l`$.
+
+- **Orbit**: For fixed $`Y_{l,\mathrm{diag}}:=\mathop{\rm diag}\nolimits (y_1,y_2,y_3)`$, the orbit of $`Y_{l,\mathrm{diag}}`$ is the image of the map
+
+```math
+\left.
+\begin{aligned}
+\mathcal F_l: U(3)\times U(3)&\to M_3(\mathbb C),\\
+(S_1,S_2)&\mapsto S_1Y_{l,\mathrm{diag}}S_2^\dagger,
+\end{aligned}
+\right.
+\tag{5.58}
+```
+
+where $`M_3(\mathbb C)`$ is the space of complex $`3\times3`$ matrices, of real dimension $`18`$. The question is the real dimension of the orbit.
+
+- **Stabilizer**: The subgroup of pairs $`(S_1,S_2)`$ with $`S_1Y_{l,\mathrm{diag}}S_2^\dagger=Y_{l,\mathrm{diag}}`$.
+
+For $`0<y_1<y_2<y_3`$, the stabilizer condition and its Hermitian conjugate give $`S_1Y_{l,\mathrm{diag}}^2S_1^\dagger=Y_{l,\mathrm{diag}}^2=S_2Y_{l,\mathrm{diag}}^2S_2^\dagger`$. The diagonal entries of $`Y_{l,\mathrm{diag}}^2`$ are distinct, so $`S_1`$ and $`S_2`$ are diagonal, and since $`Y_{l,\mathrm{diag}}`$ is invertible, the stabilizer is
+
+```math
+\left.
+S_1=S_2=\mathop{\rm diag}\nolimits (e^{i\varphi_1},e^{i\varphi_2},e^{i\varphi_3}),\qquad \varphi_k\in\mathbb R .
+\right.
+\tag{5.59}
+```
+
+The orbit is $`U(3)\times U(3)`$ modulo the stabilizer, so its real dimension is $`2\dim U(3)-3=18-3=15`$. The spectrum of $`Y_l^\dagger Y_l`$ fixes the ordered singular values, so by (5.57) every $`Y_l`$ belongs to exactly one orbit, and for $`0<y_1<y_2<y_3`$ the real parameters of $`Y_l`$ split as $`18=15+3`$: $`15`$ along the orbit and the $`3`$ singular values. When singular values coincide or vanish, the stabilizer is larger and the orbit has dimension less than $`15`$.
+
+Under (5.56), $`S_{\ell_L}`$ and $`S_{E_R}`$ move $`Y_l`$ along its orbit. In particular, the generation transformation (5.54) with $`S_{\ell_L}=S_1`$ and $`S_{E_R}=S_2`$ gives
+
+```math
+\left.
+\boxed{Y_l\to S_{\ell_L}^\dagger Y_lS_{E_R}=\begin{pmatrix}y_1&0&0\\0&y_2&0\\0&0&y_3\end{pmatrix}}\,.
+\right.
+\tag{5.60}
+```
+
+The $`15`$ real parameters along the orbit are therefore unphysical generation degrees of freedom, and $`Y_l`$ has $`3`$ physical parameters, $`y_1,y_2,y_3`$.
+
+Excluding the unphysical generation degrees of freedom, what remains is flavor: for $`y_1<y_2<y_3`$ the three generations are physically distinct, and in the basis of (5.60), called the flavor basis, the generation index $`\alpha=1,2,3`$ of $`\ell_L`$ and $`E_R`$ labels the flavors $`e,\mu,\tau`$.
+
+</div>
+
+<div style="margin-left: 2em;">
+
+$`\circ`$ Quarks
+
+The matrices $`Y_d`$ and $`Y_u`$ have the singular value decompositions
+
+```math
+\left.
+\begin{aligned}
+Y_d&=S_3\begin{pmatrix}y_d&0&0\\0&y_s&0\\0&0&y_b\end{pmatrix}S_4^\dagger,&&0\le y_d\le y_s\le y_b,\\
+Y_u&=S_5\begin{pmatrix}y_u&0&0\\0&y_c&0\\0&0&y_t\end{pmatrix}S_6^\dagger,&&0\le y_u\le y_c\le y_t,
+\end{aligned}
+\right.
+\tag{5.61}
+```
+
+with $`S_3,S_4,S_5,S_6\in U(3)`$. Unlike $`Y_l`$, they share $`S_{Q_L}`$ in (5.56), which can remove only one of the left matrices $`S_3`$ and $`S_5`$. The generation transformation (5.54) with $`S_{Q_L}=S_3`$, $`S_{d_R}=S_4`$ and $`S_{u_R}=S_6`$ gives
+
+```math
+\left.
+\boxed{Y_d\to\begin{pmatrix}y_d&0&0\\0&y_s&0\\0&0&y_b\end{pmatrix},\qquad Y_u\to V_{\mathrm{CKM}}^\dagger\begin{pmatrix}y_u&0&0\\0&y_c&0\\0&0&y_t\end{pmatrix}},\qquad V_{\mathrm{CKM}}:=S_5^\dagger S_3\in U(3).
+\right.
+\tag{5.62}
+```
+
+The generation transformations that keep the form (5.62) keep the diagonal matrices $`Y_dY_d^\dagger`$, $`Y_d^\dagger Y_d`$ and $`Y_u^\dagger Y_u`$, whose entries are distinct for $`0<y_d<y_s<y_b`$ and $`0<y_u<y_c<y_t`$, so $`S_{Q_L},S_{d_R},S_{u_R}`$ are diagonal; keeping $`Y_d`$ also requires $`S_{d_R}=S_{Q_L}`$. These transformations, and their action on $`V_{\mathrm{CKM}}`$ by (5.56), are
+
+```math
+\left.
+\begin{aligned}
+&S_{Q_L}=S_{d_R}=\mathop{\rm diag}\nolimits (e^{i\varphi_1},e^{i\varphi_2},e^{i\varphi_3}),\qquad S_{u_R}=\mathop{\rm diag}\nolimits (e^{i\varphi'_1},e^{i\varphi'_2},e^{i\varphi'_3}),\\
+&(V_{\mathrm{CKM}})_{\alpha\beta}\to e^{i(\varphi_\beta-\varphi'_\alpha)}(V_{\mathrm{CKM}})_{\alpha\beta}.
+\end{aligned}
+\right.
+\tag{5.63}
+```
+
+Of the $`9`$ real parameters of $`V_{\mathrm{CKM}}`$, $`3`$ angles and $`6`$ phases, (5.63) removes $`5`$ phases, since $`V_{\mathrm{CKM}}`$ is unchanged when all six $`\varphi_\alpha,\varphi'_\alpha`$ are equal. $`V_{\mathrm{CKM}}`$ therefore has $`3`$ angles and $`1`$ phase, and $`Y_d,Y_u`$ have $`6+4=10`$ physical parameters out of their $`36`$ real parameters; with the $`3`$ of $`Y_l`$, the Yukawa interactions (5.51) have $`13`$ physical parameters out of $`54`$.
+
+In the basis of (5.62), the generation indices of $`d_R`$ and $`u_R`$ label the flavors $`d,s,b`$ and $`u,c,t`$, and that of $`Q_L`$ labels $`d,s,b`$ in $`Y_d`$; in $`Y_u`$, the flavors $`u,c,t`$ are labeled by the index of $`V_{\mathrm{CKM}}Q_L`$. Unless $`V_{\mathrm{CKM}}`$ is diagonal, the generation index of $`Q_L`$ cannot label the flavors of $`Y_d`$ and $`Y_u`$ at the same time.
+
+</div>
+
+
+
 
 
 
@@ -1627,131 +1798,4 @@ Y_l\to V_{\ell_L}^\dagger Y_lV_{E_R},\qquad Y_d\to V_{Q_L}^\dagger Y_dV_{d_R},\q
 
 
 <br><br>
-
-<a id="electroweak-gauge-theory"></a>
-<a id="electroweak-theory"></a>
-### 5.3 $`W^\pm`$, $`Z^0`$, $`\gamma`$: Electroweak Theory
-
-
-
-
-<a id="qed"></a>
-<a id="electroweak-gauge-symmetry"></a>
-#### Gauge Symmetry $`SU(2)_L\times U(1)_Y`$
-
-
-
-- **Generators and covariant derivative**: the generators $`T^a`$ ($`a=1,2,3`$) of $`SU(2)_L`$ and $`Y`$ of $`U(1)_Y`$ on the fields of [Section 5.2](#sm-fermions), and the covariant derivative, are
-
-```math
-\left.
-\begin{aligned}
-\ell_L&:\quad T^a=\frac{\sigma^a}{2}\otimes I_\alpha\otimes I_s, &
-Y&=-\frac12\,I_i\otimes I_\alpha\otimes I_s,\\
-E_R&:\quad T^a=0, &
-Y&=-I_\alpha\otimes I_s,\\
-Q_L&:\quad T^a=\frac{\sigma^a}{2}\otimes I_c\otimes I_\alpha\otimes I_s, &
-Y&=\frac16\,I_i\otimes I_c\otimes I_\alpha\otimes I_s,\\
-u_R&:\quad T^a=0, &
-Y&=\frac23\,I_c\otimes I_\alpha\otimes I_s,\\
-d_R&:\quad T^a=0, &
-Y&=-\frac13\,I_c\otimes I_\alpha\otimes I_s,\\[6pt]
-D_\mu&:=\partial_\mu-ig_2W_\mu^aT^a-ig_1YB_\mu,
-\end{aligned}
-\right.
-\tag{5.55}
-```
-
-where $`\sigma^a/2`$ acts on the $`SU(2)_L`$ index $`i`$, and $`I_i`$, $`I_c`$, $`I_\alpha`$, $`I_s`$ are the identities on the indices $`i`$, $`c`$, $`\alpha`$, $`s`$. 
-
-In $`D_\mu`$, $`W_\mu^a`$ and $`B_\mu`$ are the real $`SU(2)_L`$ and $`U(1)_Y`$ gauge fields, $`g_2,g_1>0`$ are the couplings, and $`T^a`$, $`Y`$ are those of the field on which $`D_\mu`$ acts.
-
-
-
-<a id="electroweak-interaction"></a>
-#### Interaction 
-
-- **Electric charge, Weinberg angle and the fields $`W_\mu^\pm`$, $`Z_\mu`$, $`A_\mu^{\mathrm{em}}`$**: with $`T^a`$, $`Y`$ those of a field of (5.55),
-
-```math
-\left.
-\begin{aligned}
-Q&:=T^3+Y,\qquad T^\pm:=T^1\pm iT^2,\\
-\tan\theta_W&:=\frac{g_1}{g_2},\qquad s_W:=\sin\theta_W=\frac{g_1}{\sqrt{g_1^2+g_2^2}},\qquad c_W:=\cos\theta_W=\frac{g_2}{\sqrt{g_1^2+g_2^2}},\\
-e&:=g_2s_W=g_1c_W=\frac{g_1g_2}{\sqrt{g_1^2+g_2^2}},\\
-W_\mu^\pm&:=\frac{W_\mu^1\mp iW_\mu^2}{\sqrt2},\qquad
-\begin{pmatrix}Z_\mu\\A_\mu^{\mathrm{em}}\end{pmatrix}:=\begin{pmatrix}c_W&-s_W\\s_W&c_W\end{pmatrix}\begin{pmatrix}W_\mu^3\\B_\mu\end{pmatrix}.
-\end{aligned}
-\right.
-\tag{5.56}
-```
-
-Thus $`Q=\mathop{\rm diag}\nolimits (0,-1)`$ on $`\ell_L`$, $`-1`$ on $`E_R`$, $`\mathop{\rm diag}\nolimits (\frac23,-\frac13)`$ on $`Q_L`$, $`\frac23`$ on $`u_R`$ and $`-\frac13`$ on $`d_R`$, where $`\mathop{\rm diag}\nolimits\,`$ acts on the index $`i`$ and each entry multiplies the identities on the other indices. 
-
-
-
-The Lagrangian density contains the lepton and quark interaction terms
-
-```math
-\left.
-\begin{aligned}
-\mathcal L&\supset\overline{\ell_L}\gamma^\mu\Bigl(g_2W_\mu^a\frac{\sigma^a}2-\frac{g_1}2B_\mu\Bigr)\ell_L-g_1B_\mu\,\overline{E_R}\gamma^\mu E_R,\\
-\mathcal L&\supset\overline{Q_L}\gamma^\mu\Bigl(g_2W_\mu^a\frac{\sigma^a}2+\frac{g_1}6B_\mu\Bigr)Q_L+\frac23g_1B_\mu\,\overline{u_R}\gamma^\mu u_R-\frac13g_1B_\mu\,\overline{d_R}\gamma^\mu d_R.
-\end{aligned}
-\right.
-\tag{5.57}
-```
-
-Inverting (5.56), 
-
-```math
-\left.
-\begin{aligned}
-g_2W_\mu^aT^a+g_1YB_\mu
-&=\frac{g_2}{\sqrt2}\bigl(W_\mu^+T^++W_\mu^-T^-\bigr)+A_\mu^{\mathrm{em}}\bigl(g_2s_WT^3+g_1c_WY\bigr)+Z_\mu\bigl(g_2c_WT^3-g_1s_WY\bigr)\\
-&=\frac{g_2}{\sqrt2}\bigl(W_\mu^+T^++W_\mu^-T^-\bigr)+eQA_\mu^{\mathrm{em}}+\frac{g_2}{c_W}\bigl(T^3-s_W^2Q\bigr)Z_\mu .
-\end{aligned}
-\right.
-\tag{5.58}
-```
-
-Write $`\ell_L=(\nu_L,l_L)^T`$ and $`Q_L=(u_L,d_L)^T`$ in the index $`i`$. Then $`\overline{\ell_L}\gamma^\mu T^+\ell_L=\overline{\nu_L}\gamma^\mu l_L`$ and $`\overline{Q_L}\gamma^\mu T^+Q_L=\overline{u_L}\gamma^\mu d_L`$, while $`T^\pm=T^3=0`$ on $`E_R`$, $`u_R`$, $`d_R`$. 
-
-Since $`\bar\psi_1\gamma^\mu\psi_2=\overline{P_L\psi_1}\gamma^\mu P_L\psi_2+\overline{P_R\psi_1}\gamma^\mu P_R\psi_2`$ by (1.137), the $`A_\mu^{\mathrm{em}}`$ terms combine into the Dirac fields $`l:=l_L+E_R`$, $`u:=u_L+u_R`$ and $`d:=d_L+d_R`$. 
-
-Substituting (5.58) into (5.57), the lepton terms are
-
-```math
-\left.
-\boxed{
-\begin{aligned}
-\mathcal L\supset{}&\frac{g_2}{\sqrt2}\bigl(W_\mu^+\,\overline{\nu_L}\gamma^\mu l_L+W_\mu^-\,\overline{l_L}\gamma^\mu\nu_L\bigr)-eA_\mu^{\mathrm{em}}\,\bar l\gamma^\mu l\\
-&+\frac{g_2}{c_W}Z_\mu\Bigl[\frac12\,\overline{\nu_L}\gamma^\mu\nu_L+\Bigl(-\frac12+s_W^2\Bigr)\overline{l_L}\gamma^\mu l_L+s_W^2\,\overline{E_R}\gamma^\mu E_R\Bigr],
-\end{aligned}
-}
-\right.
-\tag{5.59}
-```
-
-and the quark terms are
-
-```math
-\left.
-\boxed{
-\begin{aligned}
-\mathcal L\supset{}&\frac{g_2}{\sqrt2}\bigl(W_\mu^+\,\overline{u_L}\gamma^\mu d_L+W_\mu^-\,\overline{d_L}\gamma^\mu u_L\bigr)+eA_\mu^{\mathrm{em}}\Bigl(\frac23\,\bar u\gamma^\mu u-\frac13\,\bar d\gamma^\mu d\Bigr)\\
-&+\frac{g_2}{c_W}Z_\mu\Bigl[\Bigl(\frac12-\frac23s_W^2\Bigr)\overline{u_L}\gamma^\mu u_L-\frac23s_W^2\,\overline{u_R}\gamma^\mu u_R\\
-&\qquad\qquad+\Bigl(-\frac12+\frac13s_W^2\Bigr)\overline{d_L}\gamma^\mu d_L+\frac13s_W^2\,\overline{d_R}\gamma^\mu d_R\Bigr].
-\end{aligned}
-}
-\right.
-\tag{5.60}
-```
-
-
-
-
-
-
-
 

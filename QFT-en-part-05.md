@@ -12,7 +12,7 @@
 
 **Scope and Gauge**
 
-- **Theory**: the minimal Standard Model of [Section 5.3](QFT-en-part-03.md#electroweak-theory) and [Section 5.4](QFT-en-part-04.md#qcd), with gauge group $`SU(3)_c\times SU(2)_L\times U(1)_Y`$, three generations of quarks and leptons in the mass bases of Section 5.3, and the Higgs doublet $`H`$. There are no right-handed neutrinos, so the neutrinos are massless; the seesaw fields of [Chapter 6](QFT-en-part-04.md#qft-ch6) are not included.
+- **Theory**: the minimal Standard Model of [Section 5.3](QFT-en-part-04.md#electroweak-theory) and [Section 5.4](QFT-en-part-04.md#qcd), with gauge group $`SU(3)_c\times SU(2)_L\times U(1)_Y`$, three generations of quarks and leptons in the mass bases of Section 5.3, and the Higgs doublet $`H`$. There are no right-handed neutrinos, so the neutrinos are massless; the seesaw fields of [Chapter 6](QFT-en-part-04.md#qft-ch6) are not included.
 - **Electroweak gauge**: the unitary gauge $`H=(0,v_{\mathrm{SM}}+h)^T/\sqrt2`$ of Section 5.3, with $`v_{\mathrm{SM}}\simeq246\,\mathrm{GeV}`$. The electroweak bosons are $`W^\pm_\mu`$, $`Z_\mu`$, $`A^{\mathrm{em}}_\mu`$ and $`h`$; there are no Goldstone fields.
 - **Photon and gluons**: the covariant gauge fixing of [Section 4.3](QFT-en-part-03.md#feynman-diagrams), with one parameter $`\xi`$ for $`A^{\mathrm{em}}_\mu`$ and for the gluons $`A^a_\mu`$ of Section 5.4 (separate parameters may be used),
 
@@ -32,7 +32,7 @@ These choices hold only in this subsection.
 
 **Fields and Free Lagrangian**
 
-- **Fermions**: $`\psi_f`$ as in the neutral currents of Section 5.3: $`\psi_f=q_f`$ for $`f=u,d,s,c,b,t`$ (color triplets), $`\psi_f=l_f`$ for $`f=e,\mu,\tau`$, and $`\psi_{\nu_\alpha}=\nu_{\alpha L}`$. Here $`m_f`$ is the mass of $`\psi_f`$, with $`m_{\nu_\alpha}=0`$; $`Q_f`$ is the charge of [Section 5.3](QFT-en-part-03.md#qed), and $`T_f^3`$ is that of Section 5.3.
+- **Fermions**: $`\psi_f`$ as in the neutral currents of Section 5.3: $`\psi_f=q_f`$ for $`f=u,d,s,c,b,t`$ (color triplets), $`\psi_f=l_f`$ for $`f=e,\mu,\tau`$, and $`\psi_{\nu_\alpha}=\nu_{\alpha L}`$. Here $`m_f`$ is the mass of $`\psi_f`$, with $`m_{\nu_\alpha}=0`$; $`Q_f`$ is the charge of [Section 5.3](QFT-en-part-04.md#qed), and $`T_f^3`$ is that of Section 5.3.
 - **Vector fields**: $`A^{\mathrm{em}}_\mu`$, $`Z_\mu`$, $`W^\pm_\mu`$ of Section 5.3 and the gluons $`A^a_\mu`$, $`a=1,\ldots,8`$. For each of them write $`X_{\mu\nu}:=\partial_\mu X_\nu-\partial_\nu X_\mu`$.
 - **Scalar**: the Higgs field $`h`$.
 

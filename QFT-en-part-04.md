@@ -1,5 +1,132 @@
 > English, part 4/5 · [Complete file](QFT.md) · [1](QFT-en-part-01.md) · [2](QFT-en-part-02.md) · [3](QFT-en-part-03.md) · [4](QFT-en-part-04.md) · [5](QFT-en-part-05.md)
 
+<a id="electroweak-gauge-theory"></a>
+<a id="electroweak-theory"></a>
+### 5.3 $`W^\pm`$, $`Z^0`$, $`\gamma`$: Electroweak Theory
+
+
+
+
+<a id="qed"></a>
+<a id="electroweak-gauge-symmetry"></a>
+#### Gauge Symmetry $`SU(2)_L\times U(1)_Y`$
+
+
+
+- **Generators and covariant derivative**: the generators $`T^a`$ ($`a=1,2,3`$) of $`SU(2)_L`$ and $`Y`$ of $`U(1)_Y`$ on the fields of [Section 5.2](QFT-en-part-03.md#sm-fermions), and the covariant derivative, are
+
+```math
+\left.
+\begin{aligned}
+\ell_L&:\quad T^a=\frac{\sigma^a}{2}\otimes I_\alpha\otimes I_s, &
+Y&=-\frac12\,I_i\otimes I_\alpha\otimes I_s,\\
+E_R&:\quad T^a=0, &
+Y&=-I_\alpha\otimes I_s,\\
+Q_L&:\quad T^a=\frac{\sigma^a}{2}\otimes I_c\otimes I_\alpha\otimes I_s, &
+Y&=\frac16\,I_i\otimes I_c\otimes I_\alpha\otimes I_s,\\
+u_R&:\quad T^a=0, &
+Y&=\frac23\,I_c\otimes I_\alpha\otimes I_s,\\
+d_R&:\quad T^a=0, &
+Y&=-\frac13\,I_c\otimes I_\alpha\otimes I_s,\\[6pt]
+D_\mu&:=\partial_\mu-ig_2W_\mu^aT^a-ig_1YB_\mu,
+\end{aligned}
+\right.
+\tag{5.64}
+```
+
+where $`\sigma^a/2`$ acts on the $`SU(2)_L`$ index $`i`$, and $`I_i`$, $`I_c`$, $`I_\alpha`$, $`I_s`$ are the identities on the indices $`i`$, $`c`$, $`\alpha`$, $`s`$. 
+
+In $`D_\mu`$, $`W_\mu^a`$ and $`B_\mu`$ are the real $`SU(2)_L`$ and $`U(1)_Y`$ gauge fields, $`g_2,g_1>0`$ are the couplings, and $`T^a`$, $`Y`$ are those of the field on which $`D_\mu`$ acts.
+
+
+
+<a id="electroweak-interaction"></a>
+#### Interaction 
+
+- **Electric charge, Weinberg angle and the fields $`W_\mu^\pm`$, $`Z_\mu`$, $`A_\mu^{\mathrm{em}}`$**: with $`T^a`$, $`Y`$ those of a field of (5.64),
+
+```math
+\left.
+\begin{aligned}
+Q&:=T^3+Y,\qquad T^\pm:=T^1\pm iT^2,\\
+\tan\theta_W&:=\frac{g_1}{g_2},\qquad s_W:=\sin\theta_W=\frac{g_1}{\sqrt{g_1^2+g_2^2}},\qquad c_W:=\cos\theta_W=\frac{g_2}{\sqrt{g_1^2+g_2^2}},\\
+e&:=g_2s_W=g_1c_W=\frac{g_1g_2}{\sqrt{g_1^2+g_2^2}},\\
+W_\mu^\pm&:=\frac{W_\mu^1\mp iW_\mu^2}{\sqrt2},\qquad
+\begin{pmatrix}Z_\mu\\A_\mu^{\mathrm{em}}\end{pmatrix}:=\begin{pmatrix}c_W&-s_W\\s_W&c_W\end{pmatrix}\begin{pmatrix}W_\mu^3\\B_\mu\end{pmatrix}.
+\end{aligned}
+\right.
+\tag{5.65}
+```
+
+Thus $`Q=\mathop{\rm diag}\nolimits (0,-1)`$ on $`\ell_L`$, $`-1`$ on $`E_R`$, $`\mathop{\rm diag}\nolimits (\frac23,-\frac13)`$ on $`Q_L`$, $`\frac23`$ on $`u_R`$ and $`-\frac13`$ on $`d_R`$, where $`\mathop{\rm diag}\nolimits\,`$ acts on the index $`i`$ and each entry multiplies the identities on the other indices. 
+
+
+
+The Lagrangian density contains the lepton and quark interaction terms
+
+```math
+\left.
+\begin{aligned}
+\mathcal L&\supset\overline{\ell_L}\gamma^\mu\Bigl(g_2W_\mu^a\frac{\sigma^a}2-\frac{g_1}2B_\mu\Bigr)\ell_L-g_1B_\mu\,\overline{E_R}\gamma^\mu E_R,\\
+\mathcal L&\supset\overline{Q_L}\gamma^\mu\Bigl(g_2W_\mu^a\frac{\sigma^a}2+\frac{g_1}6B_\mu\Bigr)Q_L+\frac23g_1B_\mu\,\overline{u_R}\gamma^\mu u_R-\frac13g_1B_\mu\,\overline{d_R}\gamma^\mu d_R.
+\end{aligned}
+\right.
+\tag{5.66}
+```
+
+Inverting (5.65), 
+
+```math
+\left.
+\begin{aligned}
+g_2W_\mu^aT^a+g_1YB_\mu
+&=\frac{g_2}{\sqrt2}\bigl(W_\mu^+T^++W_\mu^-T^-\bigr)+A_\mu^{\mathrm{em}}\bigl(g_2s_WT^3+g_1c_WY\bigr)+Z_\mu\bigl(g_2c_WT^3-g_1s_WY\bigr)\\
+&=\frac{g_2}{\sqrt2}\bigl(W_\mu^+T^++W_\mu^-T^-\bigr)+eQA_\mu^{\mathrm{em}}+\frac{g_2}{c_W}\bigl(T^3-s_W^2Q\bigr)Z_\mu .
+\end{aligned}
+\right.
+\tag{5.67}
+```
+
+Write $`\ell_L=(\nu_L,l_L)^T`$ and $`Q_L=(u_L,d_L)^T`$ in the index $`i`$. Then $`\overline{\ell_L}\gamma^\mu T^+\ell_L=\overline{\nu_L}\gamma^\mu l_L`$ and $`\overline{Q_L}\gamma^\mu T^+Q_L=\overline{u_L}\gamma^\mu d_L`$, while $`T^\pm=T^3=0`$ on $`E_R`$, $`u_R`$, $`d_R`$. 
+
+Since $`\bar\psi_1\gamma^\mu\psi_2=\overline{P_L\psi_1}\gamma^\mu P_L\psi_2+\overline{P_R\psi_1}\gamma^\mu P_R\psi_2`$ by (1.137), the $`A_\mu^{\mathrm{em}}`$ terms combine into the Dirac fields $`l:=l_L+E_R`$, $`u:=u_L+u_R`$ and $`d:=d_L+d_R`$. 
+
+Substituting (5.67) into (5.66), the lepton terms are
+
+```math
+\left.
+\boxed{
+\begin{aligned}
+\mathcal L\supset{}&\frac{g_2}{\sqrt2}\bigl(W_\mu^+\,\overline{\nu_L}\gamma^\mu l_L+W_\mu^-\,\overline{l_L}\gamma^\mu\nu_L\bigr)-eA_\mu^{\mathrm{em}}\,\bar l\gamma^\mu l\\
+&+\frac{g_2}{c_W}Z_\mu\Bigl[\frac12\,\overline{\nu_L}\gamma^\mu\nu_L+\Bigl(-\frac12+s_W^2\Bigr)\overline{l_L}\gamma^\mu l_L+s_W^2\,\overline{E_R}\gamma^\mu E_R\Bigr],
+\end{aligned}
+}
+\right.
+\tag{5.68}
+```
+
+and the quark terms are
+
+```math
+\left.
+\boxed{
+\begin{aligned}
+\mathcal L\supset{}&\frac{g_2}{\sqrt2}\bigl(W_\mu^+\,\overline{u_L}\gamma^\mu d_L+W_\mu^-\,\overline{d_L}\gamma^\mu u_L\bigr)+eA_\mu^{\mathrm{em}}\Bigl(\frac23\,\bar u\gamma^\mu u-\frac13\,\bar d\gamma^\mu d\Bigr)\\
+&+\frac{g_2}{c_W}Z_\mu\Bigl[\Bigl(\frac12-\frac23s_W^2\Bigr)\overline{u_L}\gamma^\mu u_L-\frac23s_W^2\,\overline{u_R}\gamma^\mu u_R\\
+&\qquad\qquad+\Bigl(-\frac12+\frac13s_W^2\Bigr)\overline{d_L}\gamma^\mu d_L+\frac13s_W^2\,\overline{d_R}\gamma^\mu d_R\Bigr].
+\end{aligned}
+}
+\right.
+\tag{5.69}
+```
+
+
+
+
+
+
+
+
 <a id="qcd"></a>
 ### 5.4 Gluon $`g`$: Quantum Chromodynamics
 
@@ -19,7 +146,7 @@ d_R&:\quad T^a=\frac{\lambda^a}{2}\otimes I_\alpha\otimes I_s,\\[6pt]
 D_\mu&:=\partial_\mu-ig_sA_\mu^aT^a,
 \end{aligned}
 \right.
-\tag{5.61}
+\tag{5.70}
 ```
 
 where $`\lambda^a/2`$ acts on the color index $`c`$, and $`I_i`$, $`I_\alpha`$, $`I_s`$ are the identities on the indices $`i`$, $`\alpha`$, $`s`$.
@@ -40,7 +167,7 @@ The quadratic Casimir $`T^aT^a`$ commutes with every $`T^b`$, since $`f^{bac}`$ 
 \left.
 [T^b,T^aT^a]=[T^b,T^a]T^a+T^a[T^b,T^a]=if^{bac}\bigl(T^cT^a+T^aT^c\bigr)=0.
 \right.
-\tag{5.62}
+\tag{5.71}
 ```
 
 The defining representation of $`SU(3)`$ is irreducible, so by Schur's lemma $`T^aT^a=C_FI_3`$. Taking the trace with (5.13),
@@ -51,7 +178,7 @@ The defining representation of $`SU(3)`$ is irreducible, so by Schur's lemma $`T
 \quad\Longrightarrow\quad
 \boxed{T^aT^a=C_FI_3,\qquad C_F=\tfrac43.}
 \right.
-\tag{5.63}
+\tag{5.72}
 ```
 
 **Quark Fields**
@@ -64,7 +191,7 @@ q_f(x):=\begin{pmatrix}\psi_{f,1}(x)\\\psi_{f,2}(x)\\\psi_{f,3}(x)\end{pmatrix},
 \qquad
 \bar q_f(x):=\bigl(\bar\psi_{f,1}(x),\bar\psi_{f,2}(x),\bar\psi_{f,3}(x)\bigr).
 \right.
-\tag{5.64}
+\tag{5.73}
 ```
 
 Throughout this section $`\gamma^\mu`$ acts on the spinor index of each $`\psi_{f,a}`$ and the $`3\times3`$ matrices $`T^a`$ act on the color index, so $`\gamma^\mu`$ commutes with every matrix built from the $`T^a`$.
@@ -77,7 +204,7 @@ Let $`\theta^a:\mathbb R^4\to\mathbb R`$, $`a=1,\ldots,8`$, and set
 \left.
 g(x):=e^{i\theta^a(x)T^a}\in SU(3).
 \right.
-\tag{5.65}
+\tag{5.74}
 ```
 
 This is the internal transformation (1.72) with $`g`$ now depending on $`x`$. The quark fields transform as
@@ -87,10 +214,10 @@ This is the internal transformation (1.72) with $`g`$ now depending on $`x`$. Th
 q_f'(x)=g(x)\,q_f(x),\qquad
 \bar q_f'(x)=\bar q_f(x)\,g^\dagger(x).
 \right.
-\tag{5.66}
+\tag{5.75}
 ```
 
-Since $`\partial_\mu(gq_f)=g\,\partial_\mu q_f+(\partial_\mu g)\,q_f`$, the derivative term of (5.18) is not invariant under (5.66):
+Since $`\partial_\mu(gq_f)=g\,\partial_\mu q_f+(\partial_\mu g)\,q_f`$, the derivative term of (5.18) is not invariant under (5.75):
 
 ```math
 \left.
@@ -98,7 +225,7 @@ Since $`\partial_\mu(gq_f)=g\,\partial_\mu q_f+(\partial_\mu g)\,q_f`$, the deri
 =\bar q_f\,i\gamma^\mu\partial_\mu q_f
 +\bar q_f\,i\gamma^\mu g^\dagger(\partial_\mu g)\,q_f.
 \right.
-\tag{5.67}
+\tag{5.76}
 ```
 
 **Covariant Derivative and Gluon Fields**
@@ -110,7 +237,7 @@ Introduce eight real vector fields $`A^a_\mu`$, the gluon fields, and define
 A_\mu:=A^a_\mu T^a,\qquad
 D_\mu:=\partial_\mu-ig_sA_\mu,
 \right.
-\tag{5.68}
+\tag{5.77}
 ```
 
 where $`g_s\in\mathbb R`$ is the strong coupling constant and $`D_\mu`$ acts on color triplets. Let $`A_\mu'`$ denote the transformed gluon field and $`D_\mu':=\partial_\mu-ig_sA_\mu'`$. We require $`D_\mu'q_f'=g\,D_\mu q_f`$:
@@ -122,7 +249,7 @@ D_\mu'(gq_f)&=g\,\partial_\mu q_f+(\partial_\mu g)\,q_f-ig_sA_\mu'\,g\,q_f,\\[6p
 g\,D_\mu q_f&=g\,\partial_\mu q_f-ig_s\,gA_\mu\,q_f.
 \end{aligned}
 \right.
-\tag{5.69}
+\tag{5.78}
 ```
 
 Equating the two for all $`q_f`$ gives $`A_\mu'g=gA_\mu-\frac{i}{g_s}\partial_\mu g`$, i.e.
@@ -134,7 +261,7 @@ A_\mu'=gA_\mu g^\dagger-\frac{i}{g_s}(\partial_\mu g)\,g^\dagger
 =gA_\mu g^\dagger+\frac{i}{g_s}\,g\,\partial_\mu g^\dagger.
 }
 \right.
-\tag{5.70}
+\tag{5.79}
 ```
 
 Differentiating $`gg^\dagger=I_3`$ gives $`\bigl((\partial_\mu g)g^\dagger\bigr)^\dagger=-(\partial_\mu g)g^\dagger`$, and Jacobi's formula $`\partial_\mu\det g=\det g\,\mathop{\rm tr}\nolimits (g^\dagger\partial_\mu g)`$ with $`\det g=1`$ gives $`\mathop{\rm tr}\nolimits \bigl((\partial_\mu g)g^\dagger\bigr)=0`$. Hence $`A_\mu'`$ is again Hermitian and traceless, $`A_\mu'=A_\mu'^aT^a`$ with real $`A_\mu'^a`$.
@@ -145,10 +272,10 @@ Since $`D_\mu'(gq_f)=g\,D_\mu q_f`$ holds for all $`q_f`$, as operators on color
 \left.
 D_\mu'=g\,D_\mu\,g^\dagger.
 \right.
-\tag{5.71}
+\tag{5.80}
 ```
 
-For infinitesimal $`\theta^a`$, $`g=I_3+i\theta^aT^a+O(\theta^2)`$ and (5.70) gives
+For infinitesimal $`\theta^a`$, $`g=I_3+i\theta^aT^a+O(\theta^2)`$ and (5.79) gives
 
 ```math
 \left.
@@ -159,7 +286,7 @@ A_\mu'&=A_\mu+i\theta^b[T^b,A_\mu]+\frac1{g_s}(\partial_\mu\theta^a)T^a+O(\theta
 &=\frac1{g_s}\partial_\mu\theta^a+f^{abc}A^b_\mu\theta^c+O(\theta^2).
 \end{aligned}
 \right.
-\tag{5.72}
+\tag{5.81}
 ```
 
 **Field Strength**
@@ -175,7 +302,7 @@ Define $`F_{\mu\nu}`$ by $`[D_\mu,D_\nu]=:-ig_sF_{\mu\nu}`$. Since $`[\partial_\
 F_{\mu\nu}&=\partial_\mu A_\nu-\partial_\nu A_\mu-ig_s[A_\mu,A_\nu].
 \end{aligned}
 \right.
-\tag{5.73}
+\tag{5.82}
 ```
 
 Expanding in the basis, $`F_{\mu\nu}=F^a_{\mu\nu}T^a`$ with
@@ -186,10 +313,10 @@ Expanding in the basis, $`F_{\mu\nu}=F^a_{\mu\nu}T^a`$ with
 F^a_{\mu\nu}=\partial_\mu A^a_\nu-\partial_\nu A^a_\mu+g_sf^{abc}A^b_\mu A^c_\nu.
 }
 \right.
-\tag{5.74}
+\tag{5.83}
 ```
 
-By (5.71), $`[D_\mu',D_\nu']=g[D_\mu,D_\nu]g^\dagger`$, so
+By (5.80), $`[D_\mu',D_\nu']=g[D_\mu,D_\nu]g^\dagger`$, so
 
 ```math
 \left.
@@ -197,7 +324,7 @@ F_{\mu\nu}'=gF_{\mu\nu}g^\dagger,
 \qquad
 \delta F^a_{\mu\nu}=f^{abc}F^b_{\mu\nu}\theta^c+O(\theta^2).
 \right.
-\tag{5.75}
+\tag{5.84}
 ```
 
 By cyclicity of the trace and (5.13),
@@ -208,7 +335,7 @@ By cyclicity of the trace and (5.13),
 =\mathop{\rm tr}\nolimits \bigl(F_{\mu\nu}F^{\mu\nu}\bigr)
 =\tfrac12F^a_{\mu\nu}F^{a\mu\nu}.
 \right.
-\tag{5.76}
+\tag{5.85}
 ```
 
 **The QCD Lagrangian**
@@ -223,10 +350,10 @@ By cyclicity of the trace and (5.13),
 -\frac14F^a_{\mu\nu}F^{a\mu\nu},
 }
 \right.
-\tag{5.77}
+\tag{5.86}
 ```
 
-where the sum runs over the six flavors in (5.64), $`m_f`$ is the mass of flavor $`f`$, and $`D_\mu`$ acts on the $`q_f`$ to its right. Under (5.66) and (5.70), $`D_\mu'q_f'=g\,D_\mu q_f`$ by construction, so
+where the sum runs over the six flavors in (5.73), $`m_f`$ is the mass of flavor $`f`$, and $`D_\mu`$ acts on the $`q_f`$ to its right. Under (5.75) and (5.79), $`D_\mu'q_f'=g\,D_\mu q_f`$ by construction, so
 
 ```math
 \left.
@@ -234,12 +361,12 @@ where the sum runs over the six flavors in (5.64), $`m_f`$ is the mass of flavor
 =\bar q_f\,g^\dagger\bigl(i\gamma^\mu g\,D_\mu-m_f\,g\bigr)q_f
 =\bar q_f\bigl(i\gamma^\mu D_\mu-m_f\bigr)q_f.
 \right.
-\tag{5.78}
+\tag{5.87}
 ```
 
-Together with (5.76), $`\mathcal L_{\mathrm{QCD}}`$ is invariant under the local transformations (5.66), (5.70).
+Together with (5.85), $`\mathcal L_{\mathrm{QCD}}`$ is invariant under the local transformations (5.75), (5.79).
 
-Substituting (5.68) and (5.74) into (5.77) separates the free and interaction terms:
+Substituting (5.77) and (5.83) into (5.86) separates the free and interaction terms:
 
 ```math
 \left.
@@ -252,7 +379,7 @@ Substituting (5.68) and (5.74) into (5.77) separates the free and interaction te
 -\frac{g_s^2}{4}f^{abc}f^{ade}A^b_\mu A^c_\nu A^{d\mu}A^{e\nu}.
 \end{aligned}
 \right.
-\tag{5.79}
+\tag{5.88}
 ```
 
 **Equations of Motion**
@@ -263,10 +390,10 @@ Treating $`q_f`$, $`\bar q_f`$ and $`A^a_\mu`$ as independent, the Euler–Lagra
 \left.
 \bigl(i\gamma^\mu D_\mu-m_f\bigr)q_f=0.
 \right.
-\tag{5.80}
+\tag{5.89}
 ```
 
-For $`A^a_\nu`$, define the color current $`j^{a\nu}:=\sum_f\bar q_f\gamma^\nu T^aq_f`$. From (5.77) with (5.74) and (5.79),
+For $`A^a_\nu`$, define the color current $`j^{a\nu}:=\sum_f\bar q_f\gamma^\nu T^aq_f`$. From (5.86) with (5.83) and (5.88),
 
 ```math
 \left.
@@ -280,7 +407,7 @@ For $`A^a_\nu`$, define the color current $`j^{a\nu}:=\sum_f\bar q_f\gamma^\nu T
 &=g_sj^{a\nu}+g_sf^{abc}A^b_\mu F^{c\mu\nu}.
 \end{aligned}
 \right.
-\tag{5.81}
+\tag{5.90}
 ```
 
 The Euler–Lagrange equation $`\partial_\mu\bigl(\partial\mathcal L_{\mathrm{QCD}}/\partial(\partial_\mu A^a_\nu)\bigr)=\partial\mathcal L_{\mathrm{QCD}}/\partial A^a_\nu`$ then reads
@@ -291,16 +418,16 @@ The Euler–Lagrange equation $`\partial_\mu\bigl(\partial\mathcal L_{\mathrm{QC
 \partial_\mu F^{a\mu\nu}+g_sf^{abc}A^b_\mu F^{c\mu\nu}=-g_sj^{a\nu}.
 }
 \right.
-\tag{5.82}
+\tag{5.91}
 ```
 
-The left-hand side is the $`a`$-component of $`\partial_\mu F^{\mu\nu}-ig_s[A_\mu,F^{\mu\nu}]`$, the covariant derivative of $`F^{\mu\nu}`$ in the adjoint representation; with $`j^\nu:=j^{a\nu}T^a`$, (5.82) is
+The left-hand side is the $`a`$-component of $`\partial_\mu F^{\mu\nu}-ig_s[A_\mu,F^{\mu\nu}]`$, the covariant derivative of $`F^{\mu\nu}`$ in the adjoint representation; with $`j^\nu:=j^{a\nu}T^a`$, (5.91) is
 
 ```math
 \left.
 D_\mu F^{\mu\nu}:=\partial_\mu F^{\mu\nu}-ig_s[A_\mu,F^{\mu\nu}]=-g_s\,j^\nu.
 \right.
-\tag{5.83}
+\tag{5.92}
 ```
 
 <br><br>
@@ -1055,7 +1182,7 @@ Original Lagrangian : $`\mathcal L`$
 
 **Gauge-Fixed Lagrangian**
 
-With the covariant gauge fixing of (4.15), the QED Lagrangian (5.58) for Dirac fields $`\psi_f`$ of charge $`Q_fe`$ and mass $`m_f`$ is
+With the covariant gauge fixing of (4.15), the QED Lagrangian (5.67) for Dirac fields $`\psi_f`$ of charge $`Q_fe`$ and mass $`m_f`$ is
 
 ```math
 \left.
